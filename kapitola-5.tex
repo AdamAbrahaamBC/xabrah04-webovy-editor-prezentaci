@@ -1,4 +1,5 @@
 \chapter{Implementácia}
+Táto kapitola popisuje čitateľovi samotnú implementáciu aplikácie. Čitateľ sa oboznámi s použitými nástrojmi pri tvorení aplikácie a s postupom implementácie frontendovej a backendovej časti. Prvým bodom implementácie bolo vytvorenie zložky mono-repozitára zahrňujúci obe časti aplikácie.
 
 \section{Git a GitHub}
 Pred začatím písania zdrojového kódu sa najprv spojazdnil verzovací systém Git cez GitHub. Cieľom bolo verzovanie samotného zdrojového kódu aj dokumentácie. Pre jednoduchšiu orientáciu v repozitároch sa vytvorila GitHub organizácia, ktorá obsahuje monorepozitár pre zdrojový kód a repozitár pre dokumentáciu na jednom mieste. Monorepozitár je repozitár obsahujúci viacero projektov, v tomto prípade projekt klienta a servera. Organizácia aj repozitáre sú verejne dostupné pod odkazom:
@@ -6,10 +7,10 @@ Pred začatím písania zdrojového kódu sa najprv spojazdnil verzovací systé
         https://github.com/AdamAbrahaamBC
     \end{verbatim}
 
-GitHub ponúka projektom organizačnú tabuľku. Tabuľka pomáha v organizovaní úloh a poskytuje jednoduchší prehľad projektu. Môže mať ľubovolný počet kolóniek do ktorých sa prideľujú jednotlivé úlohy. V tomto projekte bolo postačujúce vytvorenie troch kolóniek. Kolónka \texttt{To Do} obsahuje ešte nezačaté úlohy, kolónka \texttt{In progress} úlohy, ktoré sa práve riešia a kolónka \texttt{Done} už dokončené a zatvorené úlohy. Pri vytvorení novej úlohy sa úloha automaticky priradí do kolónky \texttt{To Do}. Pri zvolení následujúcej úlohy je manuálne premiestnená do kolónky \texttt{In Progress} a pri jej zatvorení sa automaticky premiestni do kolónky \texttt{Done}.
+GitHub ponúka projektom organizačnú tabuľku(project board). Tabuľka pomáha v organizovaní úloh a poskytuje jednoduchší prehľad projektu. Môže mať ľubovolný počet kolóniek, do ktorých sa prideľujú jednotlivé úlohy. V tomto projekte bolo postačujúce vytvorenie troch kolóniek. Kolónka \texttt{To Do} obsahuje ešte nezačaté úlohy, kolónka \texttt{In progress} úlohy, ktoré sa práve riešia a kolónka \texttt{Done} už dokončené a zatvorené úlohy. Pri vytvorení novej úlohy sa úloha automaticky priradí do kolónky \texttt{To Do}. Pri zvolení následujúcej úlohy musí byť manuálne premiestnená do kolónky \texttt{In Progress} a pri jej zatvorení sa automaticky premiestni do kolónky \texttt{Done}.
 
 
-K jednotlivým úlohám sú pridelené štítky. Štítky označujú o aký typ úlohy sa jedná. Dostupné štítky projektu sú následovné:
+K jednotlivým úlohám sú pridelené štítky. Štítky označujú o aký typ úlohy sa jedná. Dostupné štítky projektu sú nasledujúce.
 
     \begin{itemize}
         \item\textbf{backend} - označuje úlohy týkajúce sa backendu
@@ -19,3 +20,50 @@ K jednotlivým úlohám sú pridelené štítky. Štítky označujú o aký typ 
         \item\textbf{todo} - označuje zatiaľ nezačaté úlohy
         \item\textbf{done} - označuje dokončené úlohy
     \end{itemize}
+
+\subsection{Implementácia frontendu}
+Implementácia frontendu sa začala stiahnutím \texttt{Node.js}. Node.js obsahuje nástroj \texttt{npx} pre spúšťanie balíčkov. Pomocou npx sa vytvoril Nuxt.js projekt cez terminálový príkaz: \texttt{npx create-nuxt-app <názov-projektu>}. 
+
+\vspace{5mm}
+Po zadaní príkazu sa spustí sprievodca inštalácie, kde sa zvolil:
+    \begin{itemize}
+        \item správca balíčkov \texttt{npm}
+        \item podpora pre \texttt{TypeScript}
+        \item \texttt{Buefy} framework pre užívateľské prostredie
+        \item komunikačný modul \texttt{axios}
+        \item analyzačný nástroj zdrojového kódu \texttt{ESLint} 
+        \item \texttt{jednostránkový} typ aplikácie(SPA)
+    \end{itemize}
+    
+\vspace{5mm}
+Balík Composition API je potrebné nainštalovať cez npm pomocou príkazu \texttt{npm install @nuxtjs/composition-api --save} a treba ho pridať medzi Nuxtom používané moduly v súbore \texttt{nuxt.config.js}.
+
+Súbor \texttt{nuxt.config.ts} treba hneď na začiatku zvýrazniť. Je to súbor obsahujúci konfigurácie aplikácie. Nastavujú sa v ňom vlastnosti hlavičky aplikácie, ako názov, meta značky a ikonka. Obsahuje nastavenia smerovania, TypeScriptu, autentifikačného modulu, globálnych CSS súborov a ostatných rozširovacích modulov.
+
+Nuxt.js udáva jednoduchý štartovací bod pre vývoj aplikácie. Po inicializácii projektu skonštruuje štruktúru aplikácie, ktorá je doplnená adresármi \texttt{composable} a \texttt{models}. štruktúru aplikácie dokopy tvoria nasledujúce adresáre:
+
+\vspace{5mm}
+\dirtree{%
+.1 /client.
+.2 /\.nuxt.
+.2 /assets.
+.2 /components.
+.2 /composable.
+.2 /dist.
+.2 /layouts.
+.2 /models.
+.2 /node\_modules.
+.2 /pages.
+.2 /plugins.
+.2 /store.
+}
+\vspace{5mm}
+
+\subsection{Autentifikácia užívateľov}
+Autentifikáciu užívateľov má na starosti autentifikačný nuxt modul. Modul sa nainštaloval cez npm, príkazom \texttt{npm install --save-exact @nuxtjs/auth-next} a pridal do nuxt konfiguračného súboru medzi moduly. Autentifikačný modul vyžaduje inštaláciu nuxt modulu \texttt{axios} pre HTTP komunikáciu. 
+
+Middleware je globálne nastavený v nuxt konfiguračnom súbore na každú jednu trasu aplikácie okrem stránky prihlasovania, registrovania a zobrazenia prezentácie v prezentačnom móde. Na týchto stránkach je middleware manuálne vypnutý a sú dostupné bez autentifikácie. Neprihlásený užívateľ pri navštívení stránky, ktorá autentifikáciu vyžaduje je automaticky presmerovaný na prihlasovaciu stránku.
+
+Modul funguje na báze schém. Schémy definujú logiku autentifikácie. Projekt môže obsahovať viacero schém pre rôzne typy prihlasovania, napríklad cez Facebook, Google, atď. V aplikácii je implementovaná lokálna schéma na báze JWT tokenov. Jej konfigurácia sa nachádza v konfiguračnom súbore. 
+
+Modul poskytuje aplikačné rozhranie cez kľúčové slovo \$auth, ktoré je globálne dostupné cez kontext aplikácie. Prihlasuje sa cez funkciu \texttt{\$auth.loginWith('local', { data: PRIHLASOVACIE\_ÚDAJE })}. Modul pošle na prihlasovací koncový bod prihlasovacie údaje. Pri úspešnom prihlásení API vráti v HTTP odpovedi autentifikačný token užívateľa, ktorý sa uloží do koláčov(cookies) aplikácie a modul si automaticky vypýta údaje o užívateľovi podľa tokenu. Údaje užívateľa sú dostupné cez objekt \texttt{\$auth.user}. Odhlasuje sa cez \texttt{\$auth.logout()}.

@@ -24,26 +24,7 @@ Aplikácia je rozdelená na dve časti, na klientskú a serverovú. Jedná sa o 
 V aplikácii sa využíva framework Nuxt.js, ktorý je nadstavbou Vue.js. Nuxt.js uľahčuje vývoj jednostránkových aplikácií a poskytuje vývojárom lepší zážitok pri programovaní. 
 Aktuálne stabilná verzia Vue.js a Nuxt.js pri začatí projektu je verzia 2, ale v aplikácii sa už využívajú \texttt{composition-api} vlastnosti verzie 3, ktoré je potrebné nainštalovať ako balík cez NPM a pridať medzi moduly Nuxt.js v konfiguračnom súbore.
 
-\subsection{Štruktúra aplikácie}
-Nuxt.js udáva jednoduchý štartovací bod pre vývoj aplikácie. Po inicializácii projektu vytvorí štruktúru aplikácie, ktorá bola doplnená adresármi \texttt{composable} a \texttt{models}. štruktúru aplikácie dokopy tvoria nasledujúce adresáre:
-
-\vspace{5mm}
-\dirtree{%
-.1 /client.
-.2 /\.nuxt.
-.2 /assets.
-.2 /components.
-.2 /composable.
-.2 /dist.
-.2 /layouts.
-.2 /models.
-.2 /node\_modules.
-.2 /pages.
-.2 /plugins.
-.2 /store.
-}
-\vspace{5mm}
-
+\subsection{Pohľad aplikácie}
 Pohľad v Nuxt.js aplikácii sa skladá z viacerých vrstiev. Najvyššia vrstva je HTML súbor \texttt{App.html}, ktorý je vytvorený automaticky a slúži pre vytvorenie kostry aplikácie. Tento súbor obsahuje všetok obsah, atribúty pre hlavičku a telo HTML dokumentu. 
 
 Nižšia vrstva obsahuje šablónu aplikácie, pomocou ktorej sa zadefinuje rovnaký obsah na viacerých stránkach. Dobrým príkladom pre obsah v šablóne je navbar, ktorý môže byť dostupný na viacerých stránkach aplikácie. 
