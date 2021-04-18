@@ -66,6 +66,25 @@ Nuxt.js udáva jednoduchý štartovací bod pre vývoj aplikácie. Po inicializ�
 }
 \vspace{5mm}
 
+\subsection*{Mobilná verzia}
+Aplikácie je určená hlavne pre webové prehliadače. Mobilná verzia je kompaktnejšia. Neobsahuje funkcionalitu vytvárania a upravovania prezentácií. Zobrazovanie a funkcie pre správu prezentácií sú avšak naďalej dostupné. Pohľad domovskej stránky a detailu prezentácie v mobilnej verzii je zobrazený na obrázku \ref{pic:domovska_stranka} a \ref{pic:mobil_detail}
+
+\begin{figure}[!hbt]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.2]{obrazky/mobil_domovska_stranka.png}
+  \caption{Mobilná verzia domovskej stránky}
+  \label{pic:mobil_domovska_stranka}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.2]{obrazky/mobil_detail.png}
+  \caption{Mobilná verzie detailu prezentácie}
+  \label{pic:mobil_detail}
+\end{minipage}
+\end{figure}
+
 \subsection{Autentifikácia užívateľov}
 Autentifikáciu užívateľov má na starosti autentifikačný nuxt modul. Modul sa nainštaluje cez npm, príkazom \texttt{npm install --save-exact @nuxtjs/auth-next} a pridal do nuxt konfiguračného súboru medzi moduly. Autentifikačný modul vyžaduje inštaláciu nuxt modulu \texttt{axios} pre HTTP komunikáciu. 
 
@@ -138,7 +157,31 @@ Podľa zásady, stavy sa upravujú iba cez mutácie v úložisku. Mutácia sa vo
 Pre zjednodušenie prístupu k úložisku a pre odstránenie biolerplate kódu sa vytvorila trieda \texttt{PresentationStore} v adresári \texttt{composable}. V jednotlivých komponentoch a na stránkach sa pristupuje k úložisku cez metódy tejto triedy. Trieda zapúzdruje vyššie popisované metódy akcií a metódy na vrátenie hodnôt stavov.
 
 \subsection{Znovupoužiteľná logika}
+Jednou z hlavných dôvodov použitia Composition API je jeho podpora pre jednoduché vyčlenenie znovupoužiteľnej logiky. Adresár \texttt{composable} obsahuje metódy a časti kódu využité na viacerých miestach v aplikácii. Príkladom je metóda pre získanie dát prezentácie v repozitári prezentácie, ktorá sa používa na domovskej stránke pri zobrazení detailu prezentácie, v editore pri úprave prezentácie a pri prezentovaní v prezentačnom móde. 
 
 \subsection{Zobrazovanie a upravovanie Markdown obsahu}
+Zobrazovanie aj upravovanie Markdown obsahu sa rieši cez balík \texttt{toast-ui}. Toast-ui poskytuje komponentu \texttt{editor} pre upravovanie obsahu. Po vykreslení komponenty sa zobrazí textová oblasť, kde užívateľ môže zadať ľubovolný text. Nad editorom sa nachádza panel nástrojov obsahujúci jednotlivé Markdown nástroje. Na pravej strane editora sa nachádza náhľad sformátovaného Markdown obsahu. Pri každej strate zamerania(focus), editor vyvolá udalosť na základe ktorej sa uložia zmeny obsahu do Vuex úložiska. 
+
+Komponenta \texttt{viewer} slúži na zobrazenie sformátovaného Markdown obsahu. Vykresľuje sa na domovskej stránke pri náhľadu do jednotlivých verzií prezentácie a pri prezentácii obsahu v prezentačnom móde. Komponente je predaný obsah stránky vo formáte Markdown ako reťazec.
 
 \subsection{Extrahovanie statickej prezentácie}
+Užívateľ má možnosť exportovania prezentácie v statickom PDF formáte. Reveal.js poskytuje špeciálnu šablónu pre formát PDF. Po kliknutí na tlačítko \texttt{download}, alebo na tlačítko \texttt{export} na domovskej stránke, alebo v bočnom panely editora aplikácia presmeruje užívateľa do prezentačného módu, kde sa mu zobrazí dialóg pre správu tlače. V dialógu je potrebné zvoliť možnosť \texttt{Uložiť ako PDF}.
+
+\section{Implementácia backendu}
+Implementácia backendu začala inicializáciou projektu v mono-repozitári aplikácie cez termináloví príkaz \texttt{npm init -Y}. Značka \texttt{-Y} slúži pre automatické vytvorenie súboru \texttt{package.json} s predvolenými hodnotami. Po inicializácii projektu sa nainštaloval balík pre server \texttt{express} a balíky pre podporu TypeScriptu \texttt{typescript} a \texttt{ts-node}.
+
+Celková implementácia a logika serverovej časti sa nachádza v adresári \texttt{server/src}. Začiatočným bodom pri spustení backendu je súbor \texttt{server.ts} nachádzajúci sa v hlavnom adresári. Súbor obsahuje triedu pomocou ktorej sa spúšťa serverová časť. Pri vytvorení novej inštancie triedy sa nastavia všetky konfigurácie pre beh servera, ako port na odpočúvanie, explicitné povolenie JSON obsahu, podpora \texttt{.env} súborov a povolenie \texttt{CORS}. V triede sa pripája ku cloudovej MongoDB databáze cez pripojovací reťazec a inicializujú sa trasy aplikácie. Podrobnejšia implementácia trias sa nachádza v adresári \texttt{routes}. 
+
+\subsection{Databáza}
+Databáza sa implementovala pomocou balíka \texttt{mongoose}. Mongoose poskytuje jednoduché pripojenie k MongoDB databáze, modelovanie objektov, vytváranie mongoose schém a dotazov. Prvým krokom bolo vytvorenie schém pre užívateľa a prezentáciu. Schémy sa mapujú k jednotlivým dokumentom v databáze a definujú ich atribúty. Aby boli použiteľné, je potrebné ich namapovať na objekty rozhrania, takto vzniknú modely. Modely sú použité v repozitári, poskytujú jednotlivé funkcie na dotazovanie nad databázou. Schémy sa nachádzajú v adresári \texttt{database} a rozhrania modelov v adresári \texttt{models}.
+
+Dotazovanie a logika nad databázou sa nachádza v adresári \texttt{repository}. V databáze sa nachádza kolekcia užívateľov a prezentácií. Pre obe kolekcie je vytvorený zvlášť súbor pre jednoduchšiu orientáciu. Repozitár užívateľov poskytuje funkcie pre získanie užívateľa podľa unikátneho identifikátora, získanie užívateľa podľa emailu, pridanie nového užívateľa do databáze, priradenie prezentácie k užívateľovi, odobranie prezentácie od užívateľa a upravenie krátkeho popisu prezentácie. Repozitár prezentácie poskytuje funkciu pre získanie detailu prezentácie podľa unikátneho identifikátora, uloženie prezentácie do databáze, odstránenie prezentácie z databáze, odstránenie konkrétnej verzie prezentácie a aktualizácia obsahu, alebo pridanie novej verzie prezentácie.
+
+\subsection{Aplikačné rozhranie}
+K aplikačnému rozhraniu sa pristupuje cez trasu \texttt{api}. Na backende sa pracuje s autentifikáciou, užívateľmi a prezentáciami. Pre každú jednu čast je definovaná zvlášť trasa. Základná definícia sa implementovala v súbore \texttt{server.ts}. Zadefinovanie koncových bodov a priradenie middlewaru k nim sa nachádza v adresári \texttt{routes}. Funkcie, ktoré sa zaoberajú spracovaním dotazov na jednotlivé koncové body od klienta sa nachádzajú v adresári \texttt{controllers}. Funkcie v týchto súboroch majú na starosť spracovanie jednotlivých dotazov, na základe požiadavkov volajú dotyčné funkcie v repozitároch a generujú odpoveď s patričným stavovým kódom.
+
+\subsection{Autentifikácia užívateľa}
+Autentifikácia užívateľa sa rieši cez JSON Web Žetóny(token). Pri prihlásený sa porovná užívateľom zadané heslo s heslom v databáze. Pri zhode sa podpíše token unikátnym identifikátorom užívateľa a tajným heslom, ktorý bol náhodne vygenerovaný špeciálnym generátorom a je uchovaný v \texttt{.env} súbore. Na podpísanie tokenu sa používa hašovací algoritmus \texttt{HMAC SHA256}.
+Token sa pošle spať HTTP odpoveďou. Autentifikačný modul v klientskej časti aplikácie token pridá do cookies a je naďalej posielaný pri každej komunikácii so serverom v hlavičke HTTP dotazu.
+
+Autentifikácia užívateľa sa pomocou tohto tokenu kontroluje v middlewaru servera. Z HTTP hlavičky dotazu sa vytiahne token užívateľa, ktorý je uchovaný pod kľúčom \texttt{authorization}. V prípade, kedy kľúč neexistuje, alebo neobsahuje žiadnu hodnotu sa pošle odpoveď s chybovým stavovým kódom \texttt{401 Neautorizovaný}. Pri výskyte tokenu sa token verifikuje pomocou tajného hesla v súbore \texttt{.env}. Pri nezhoda server odpovie chybovým stavovým kódom \texttt{403 Zakázané}. Pri úspešnom verifikovaní sa do HTTP dotazu pridá získaný unikátny identifikátor užívateľa a dotaz sa predá dotyčnej funkcie na jeho spracovanie.
