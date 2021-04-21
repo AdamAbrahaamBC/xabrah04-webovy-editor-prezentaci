@@ -11,13 +11,22 @@ TODO
 
 \section{TypeScript}
 \label{typescript}
-TODO
+Aby sa porozumela logika a nápad za vytvorením TypeScriptu, je nutné sa zoznámiť s nevýhodami JavaScriptu. JavaScript\cite{typescript} umožní zo statického webu vytvoriť dynamické aplikácie, ktoré používame dodnes. Písať zdrojový kód čisto v JavaScriptu je pomerne náročné a pri väčších projektoch takmer nemožné. Samotný jazyk neumožňuje počas programovania uvádzať dátové typy, čo veľmi sťažuje napovedanie v kóde a tiež jeho automatickú kontrolu.
 
+TypeScript\cite{typescript} bol vytvorený v roku 2012 firmou Microsoft a jeho zdrojový kód je dostupný pre verejnosť. Jedná sa o nadstavbu jazyka JavaScript. Rozširuje ho o triedy, rozhrania, statické typovanie a ďalšie funkcionality z objektovo orientovaného programovania. TypeScript je využívaný aj spoločnosťou Googlu, ktorá ho integrovala do JavasSriptového frameworku Angular.
+
+Ako už bolo spomenuté, TypeScript umožňuje programátorom statické typovanie. Existujú dva základné typové systémy:
+    \begin{itemize}
+        \item Pri \textbf{dynamickom typovaní} premenná má nastavený dátový typ, ale systém typ skrýva a nedáva ho vôbec najavo. Premenné pri dynamickom typovaní mnohokrát ani nemusia byť deklarované, akonáhle sa do nejakej premennej niečo uloží a jazyk zistí, že nebola nikdy deklarovaná, sám ju založí. Do tej istej premennej sa môže ukladať reťazec, potom objekt a potom pole. Jazyky využívajúce dynamický typovanie vnútorne automaticky menia dátový typ. V týchto jazykoch je vývoj rýchlejší vďaka menšiemu množstvu kódu, zástupcovia sú napríklad Python, alebo práve JavaScript.
+        \item Pri \textbf{statickom typovaní} je striktne vyžadované definovanie typu premennej a typ je naďalej nemenný. Pri uložení hodnoty iného typu do premennej, kompilácia zdrojového kódu skončí chybovím hlásením.
+    \end{itemize}
+    
+    TypeScript\cite{typescript} je typizovaním jazykom, všetky premenné musia byť najprv deklarované s priradeným dátovým typom. Nevýhodou je, že vďaka deklaráciám je zdrojový kód objemnejší a vývoj pomalší. Naopak obrovskou výhodou je, že kompilátor pred spustením skontroluje, či všetky nastavené hodnoty vyhovujú ich dátovým typom. Dynamické typovanie síce vyzerá ako výhodné, ale pri čítaní zdrojového kódu je ťažké zistiť typ hodnoty premennej. TypeScript do základnej mieri tiež povoľuje využitie dynamických typov cez takzvané \texttt{union typy}. Union typy umožňujú nastavenie viacero dátových typov premennej, napríklad \texttt{let data: string | number}, kde premenná \texttt{data} môže obsahovať reťazec, alebo číslo. TypeScript pri priradení hodnoty nesprávneho dátového typu nedovolí program ani skompilovať a na chybu ihneď upozorní.
 \section{Frontend}
 TODO
 
 \subsection{HTML}
-TODO
+Hypertextový značkovací jazyk\cite{html}, alebo skrátene HTML je jazyk vytvorený Timom Berners-Leeom v roku 1991. Avšak nie je to programovací jazyk, neumožňuje vytváranie premenných, alebo funkcií. Jazyk je určený na vytváranie webových stránok, na organizovanie a formátovanie rôznych informácií zobraziteľných vo webovom prehliadači. Umožňuje užívateľom vytvárať a štrukturovať sekcie, nadpisy, paragrafy, odkazy a mnoho ďalších pre webové stránky a aplikácie. Pri práci s HTML sa používajú štruktúry, ktoré sa nazývajú značky\texttt{(tagy)} a \texttt{atribúty}, pomocou ktorých sa štrukturujú jednotlivé časti web stránky. 
 
 \subsection{CSS}
 TODO
