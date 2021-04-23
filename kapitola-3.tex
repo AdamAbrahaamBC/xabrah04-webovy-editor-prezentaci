@@ -4,14 +4,16 @@ V tejto sekcii sa čitateľ zoznámi s NoSQL databázou MongoDB a knižnicou Mon
 
 \subsection{MongoDB}
 \label{mongodb}
-TODO
+MongoDB\cite{mongodb} je open-source nerelačná databáza založená na dokumentoch. Namiesto používania tradičných tabuliek a riadkov relačnej databáze, MongoDB vytvára kolekcie ktoré sa skladajú z dokumentov vo formáte JSON. Jednotlivé dokumenty sa skladajú z párov kľúč-hodnota. Každý dokument môže mať rozlišný počet položiek. Veľkosť a obsah jednotlivých dokumentov sa môže taktiež od seba líšiť. Štruktúra dokumentu sa viac podobá štruktúre, ktorú vývojári vytvárajú pri programovaní tried a objektov. 
 
-\subsection{Mongoose}
-TODO
+\subsection{Mongoose.js}
+Mongoose.js je Node.js knižnica pre dátové modelovanie objektov pre MongoDB. Uľahčuje užívateľom prácu s MongoDB prekladaním dokumentov z databáze na objekty. Spravuje vzťahy medzi dátami, poskytuje validáciu schémy, typovanie a používa sa pre modelovanie dátových modelov na MongoDB objekty. Poskytuje dopytovacie funkcie nad modelmi, pomocou ktorých sa získavajú a ukladajú dáta do databáze. Tieto funkcie sú reťazovatelné(chainable). 
+
+Mongoose používa schémy pre modelovanie a správu dát v MongoDB. Schéma popisuje atribúty jednotlivých položiek s ktorými aplikácia pracuje, napríklad jeho dátový typ, či je položka povinná, alebo voliteľná. 
 
 \section{TypeScript}
 \label{typescript}
-Aby sa porozumela logika a nápad za vytvorením TypeScriptu, je nutné sa zoznámiť s nevýhodami JavaScriptu. JavaScript\cite{typescript} umožní zo statického webu vytvoriť dynamické aplikácie, ktoré používame dodnes. Písať zdrojový kód čisto v JavaScriptu je pomerne náročné a pri väčších projektoch takmer nemožné. Samotný jazyk neumožňuje počas programovania uvádzať dátové typy, čo veľmi sťažuje napovedanie v kóde a tiež jeho automatickú kontrolu.
+Aby sa porozumela logika a nápad za vytvorením TypeScriptu a použitím ho v tomto projektu, je nutné sa najprv zoznámiť s nevýhodami JavaScriptu. JavaScript\cite{typescript} umožní zo statického webu vytvoriť dynamické aplikácie, ktoré používame dodnes. Písať zdrojový kód čisto v JavaScriptu je pomerne náročné a pri väčších projektoch takmer nemožné. Samotný jazyk neumožňuje počas programovania uvádzať dátové typy, čo veľmi sťažuje nápovedu v kóde a tiež jeho automatickú kontrolu.
 
 TypeScript\cite{typescript} bol vytvorený v roku 2012 firmou Microsoft a jeho zdrojový kód je dostupný pre verejnosť. Jedná sa o nadstavbu jazyka JavaScript. Rozširuje ho o triedy, rozhrania, statické typovanie a ďalšie funkcionality z objektovo orientovaného programovania. TypeScript je využívaný aj spoločnosťou Googlu, ktorá ho integrovala do JavasSriptového frameworku Angular.
 
@@ -26,13 +28,25 @@ Ako už bolo spomenuté, TypeScript umožňuje programátorom statické typovani
 TODO
 
 \subsection{HTML}
-Hypertextový značkovací jazyk\cite{html}, alebo skrátene HTML je jazyk vytvorený Timom Berners-Leeom v roku 1991. Avšak nie je to programovací jazyk, neumožňuje vytváranie premenných, alebo funkcií. Jazyk je určený na vytváranie webových stránok, na organizovanie a formátovanie rôznych informácií zobraziteľných vo webovom prehliadači. Umožňuje užívateľom vytvárať a štrukturovať sekcie, nadpisy, paragrafy, odkazy a mnoho ďalších pre webové stránky a aplikácie. Pri práci s HTML sa používajú štruktúry, ktoré sa nazývajú značky\texttt{(tagy)} a \texttt{atribúty}, pomocou ktorých sa štrukturujú jednotlivé časti web stránky. 
+Hypertextový značkovací jazyk\cite{html}, alebo skrátene HTML je jazyk vytvorený Timom Berners-Leeom v roku 1991. Hneď na začiatku treba zdôrazniť, že sa nejedná o programovací jazyk. HTML neumožňuje vytváranie premenných, alebo funkcií. Jazyk je určený na vytváranie webových stránok a na organizovanie, formátovanie rôznych informácií zobraziteľných vo webovom prehliadači. Umožňuje užívateľom vytvárať 
+a štrukturovať sekcie, nadpisy, paragrafy, odkazy a mnoho ďalších pre webové stránky a aplikácie. Pri práci s HTML sa používajú štruktúry, ktoré sa nazývajú \texttt{značky(tagy)} a \texttt{atribúty}, pomocou ktorých sa štrukturujú jednotlivé časti web stránky. 
 
 \subsection{CSS}
-TODO
+Kaskádové štýly\cite{css}, alebo skrátene CSS je rozšírenie jazyka HTML. Jazyk bol vytvorený a je udržiavaný skupinou v organizácii W3C\footnote{Skupina ľudí, ktorá navrhuje vylepšenia a špecifikácie o Internete a jeho vývoji.}.  Prvá verzia vznikla v roku 1996 a obsahovala iba modifikácie písmen, okrajov a farieb. Súčasná verzia je \texttt{CSS3}. Jazyk umožňuje vizuálne formátovanie internetových dokumentov a špecifikuje ako sa majú dokumenty prezentovať pre užívateľa. Pomáha v štýlovaní jednotlivých elementov a v upravovaní ich umiestnenia. Využíva sa od základných 
+štýlov, ako zmena farby textu, alebo veľkosti až k rozsiahlejším zmenám rozloženia, a aj pre zobrazovanie animovaných efektov. 
+
+V súčasnej dobe sa často používajú preprocesory pri práci s CSS. V aplikácii sa využíva preprocesor \texttt{Sass}. Preprocesor\cite{sass} je program ktorého, výstup je spracovaný ďalším programom, t.j. štýly napísané v Sass sú spracované ďalším programom z čoho vznikne CSS. Hlavným dôvodom ich použitia je prehľadnosť kódu a súborov. Medzi najpopulárnejšie preprocesory patrí Sass, Less a Stylus.
+
+\subsection*{Sass}
+Sass\cite{sass} je najstarším CSS preprocesorom. Je ľahko naučiteľný a pomerne jednoduchý jazyk. Medzi jeho hlavné výhody patrí vytváranie premenných a uchovávanie hodnôt do nich, vytváranie vnorených štýlov, matematických operácií, cyklov a funkcií. Sass naďalej podporuje importovanie externých súborov, čo umožňuje rozdelenie štýlov do rôznych logických častí. Jednotlivé celky sa potom preprocesorom skompilujú do jedného CSS súboru. 
+
+\subsection*{Buefy}
+Buefy poskytuje predpripravené komponenty pre užívateľské rozhranie. Uľahčuje prácu vývojárom so štýlovaním základných elementov dokumentu. V aplikácii sa využíva komponenta pre tlačítka, skrývanie obsahu, dialógy, kolónky vstupu užívateľa, vykreslovanie ikón, animáciu načítania, navigačný panel a bočný panel. Zdrojový kód frameworku je voľne dostupný pre verejnosť. Každá komponenta je responzívna, sama sa prispôsobuje rôznym rozlíšeniam obrazovky a týmto uľahčuje vývoj aj pre mobilnú platformu. 
+
+Framework je vytvorený vo Vue.js a zakladá sa na CSS knižnici Bulma. Bulma je taktiež open-source knižnica, ktorá je postavená na CSS architektúre \texttt{flexbox}. Samotná knižnica poskytuje CSS triedy pre štýlovanie HTML dokumentu. Buefy pomocou týchto tried vytvorí jednotlivé komponenty užívateľského rozhrania pre Vue.js, ktoré sú potom jednoducho použiteľné v aplikácii. Tieto komponenty sa označujú predponou \texttt{b-}, napríklad \texttt{<b-button></b-button>}.
 
 \subsection{Vue.js}
-Vue.js\cite{vue-guide} patrí medzi najpopulárnejšie nástroje pre tvorbu Single Page Aplikácií. Je výkonný, rýchly a minimalistický. Veľkou výhodou je, že patrí medzi progresívne frameworky, našu aplikáciu vieme rozdeliť na viacero častí, ktoré môžu byť samostatne vyvíjané. Stal sa jedným z obľúbených kvôli jeho jednoduchosti. Má veľmi prehľadnú a pestrú dokumentáciu v anglickom aj čínskom jazyku.
+Vue.js\cite{vue-guide} patrí medzi najpopulárnejšie nástroje pre tvorbu jednostránkových aplikácii. Je výkonný, rýchly a minimalistický. Veľkou výhodou je, že patrí medzi progresívne frameworky, našu aplikáciu vieme rozdeliť na viacero častí, ktoré môžu byť samostatne vyvíjané. Stal sa jedným z obľúbených kvôli jeho jednoduchosti. Má veľmi prehľadnú a pestrú dokumentáciu v anglickom aj čínskom jazyku.
 
 Framework bol vytvorený Evanom Youom, ktorý pracoval v Googlu a Meteoru. V Googlu začal používať AngularJS, ktorým sa inšpiroval, ale tento framework mu nevyhovoval kvôli jeho striktnému písaniu kódu. Jeho motiváciou bolo vziať najlepšie vlastnosti Angularu a vytvoriť z nich nástroj, ktorý mu zjednoduší a zefektívni prácu.
 
@@ -115,7 +129,20 @@ TODO
 TODO
 
 \subsection{Ostatné balíčky a knižnice}
-TODO
+\subsection*{auth-next}
+Auth-next je Nuxt.js modul pre autentifikáciu užívateľov. Implementácia autentifikácie pomocou tohto modulu sa nachádza v sekcii \ref{auth}.
+
+\subsection*{axios}
+Axios je HTTP klient pre prehliadač. Knižnica sa v aplikácii využíva pre komunikáciu medzi frontendom a backendom na klientskej časti komunikácie. 
+
+\subsection*{node-sass a sass-loader}
+Tieto knižnice slúžia pre načítanie Sass súborov a ich kompiláciu do jednotného CSS súboru.
+
+\subsection*{vuedraggable}
+Balík poskytuje Vue komponentu pre jednoduché použitie funkcionality ťahaj-a-pusti(drag-n-drop).
+
+\subsection*{vuex-persistedstate}
+Knižnica slúži na perzistovanie stavov Vuex úložiska medzi znova načítaniami stránky. Využitie knižnice je popísané v sekcii \ref{persistedstore}.
 
 \section{Backend}
 TODO
@@ -128,4 +155,17 @@ TODO
 TODO
 
 \subsection{Ostatné balíčky a knižnice}
-TODO
+\subsection*{bcrypt}
+
+\subsection*{cors}
+
+\subsection*{dayjs}
+
+\subsection*{dotenv}
+
+\subsection*{jsonwebtoken}
+
+\subsection*{nodemon}
+"nodemon -x ts-node ./src/server.ts",
+
+\subsection*{ts-node, tslint a typescript}

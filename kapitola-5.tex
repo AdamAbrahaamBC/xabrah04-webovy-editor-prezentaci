@@ -86,6 +86,7 @@ Aplikácie je určená hlavne pre webové prehliadače. Mobilná verzia je kompa
 \end{figure}
 
 \subsection{Autentifikácia užívateľov}
+\label{auth}
 Autentifikáciu užívateľov má na starosti autentifikačný nuxt modul. Modul sa nainštaluje cez npm, príkazom \texttt{npm install --save-exact @nuxtjs/auth-next} a pridal do nuxt konfiguračného súboru medzi moduly. Autentifikačný modul vyžaduje inštaláciu nuxt modulu \texttt{axios} pre HTTP komunikáciu. 
 
 Middleware je globálne nastavený v nuxt konfiguračnom súbore na každú jednu trasu aplikácie okrem stránky prihlasovania, registrovania a zobrazenia prezentácie v prezentačnom móde. Na týchto stránkach je middleware manuálne vypnutý a sú dostupné bez autentifikácie. Neprihlásený užívateľ pri navštívení stránky, ktorá autentifikáciu vyžaduje je automaticky presmerovaný na prihlasovaciu stránku.
@@ -121,6 +122,7 @@ Nuxt.js uľahčuje vývoj aj v tomto smere. Pomocou frameworku nie je potrebné 
 \vspace{5mm}
 
 \subsection{Perzistované úložisko}
+\label{persistedstore}
 Uchovávanie jednotlivých stavov aplikácie je implementované cez modul \texttt{Vuex}. Aplikácia uchováva neuložené zmeny prezentácie a skopírovanú stránku. Pri opustení editora bez uložení zmien aplikácia upozorní užívateľa, že sa jeho zmeny môžu stratiť. Môže nastať situácia pri tvorbe prezentácie, keď sa z technických dôvodov aplikácia, alebo prehliadač zatvorí. V takomto prípade sa užívateľovi nové zmeny zachovajú a bude ich mať dostupné keď sa vráti do editora danej prezentácie a verzie. Uchovávanie skopírovanej stránky sa využíva pri skopírovaní a vložení stránky prezentácie. 
 
 Štandardne sa uchované stavy vo Vuex po opustení aplikácie automaticky zmažú. Na perzistovanie úložiska sa využil balík \texttt{vuex-persistedstate}, pomocou ktorého sa stavy uložia do lokálneho úložiska prehliadača a sú dostupné aj pri znovu navštívení aplikácie.
