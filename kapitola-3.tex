@@ -46,11 +46,11 @@ Buefy poskytuje predpripravené komponenty pre užívateľské rozhranie. Uľah�
 Framework je vytvorený vo Vue.js a zakladá sa na CSS knižnici Bulma. Bulma je taktiež open-source knižnica, ktorá je postavená na CSS architektúre \texttt{flexbox}. Samotná knižnica poskytuje CSS triedy pre štýlovanie HTML dokumentu. Buefy pomocou týchto tried vytvorí jednotlivé komponenty užívateľského rozhrania pre Vue.js, ktoré sú potom jednoducho použiteľné v aplikácii. Tieto komponenty sa označujú predponou \texttt{b-}, napríklad \texttt{<b-button></b-button>}.
 
 \subsection{Vue.js}
-Vue.js\cite{vue-guide} patrí medzi najpopulárnejšie nástroje pre tvorbu jednostránkových aplikácii. Je výkonný, rýchly a minimalistický. Veľkou výhodou je, že patrí medzi progresívne frameworky, našu aplikáciu vieme rozdeliť na viacero častí, ktoré môžu byť samostatne vyvíjané. Stal sa jedným z obľúbených kvôli jeho jednoduchosti. Má veľmi prehľadnú a pestrú dokumentáciu v anglickom aj čínskom jazyku.
+Vue.js\cite{vue-guide} patrí medzi najpopulárnejšie nástroje pre tvorbu jednostránkových aplikácii. Je výkonný, rýchly a minimalistický. Veľkou výhodou je, že patrí medzi progresívne frameworky, t.j. našu aplikáciu vieme rozdeliť na viacero častí, ktoré môžu byť samostatne vyvíjané. Stal sa jedným z obľúbených kvôli jeho jednoduchosti. Má veľmi prehľadnú a pestrú dokumentáciu v anglickom aj čínskom jazyku.
 
 Framework bol vytvorený Evanom Youom, ktorý pracoval v Googlu a Meteoru. V Googlu začal používať AngularJS, ktorým sa inšpiroval, ale tento framework mu nevyhovoval kvôli jeho striktnému písaniu kódu. Jeho motiváciou bolo vziať najlepšie vlastnosti Angularu a vytvoriť z nich nástroj, ktorý mu zjednoduší a zefektívni prácu.
 
-Dizajn Vue.js sa inšpiroval MVVM\footnote{Model-View-ViewModel} architektúrou. Zameriava sa na vrstvu pohľadu. Spája pohľad a model cez dvojstrannú väzbu (anglicky two-way binding), ako je vidieť na obrázku \ref{pic:mvvm}. Ostatné funkcionality SPA, ako smerovanie a úložisko(ďalej označované ako store) môžu byť doplnené cez pomocné knižnice.
+Dizajn Vue.js sa inšpiroval MVVM\footnote{Model-View-ViewModel} architektúrou. Zameriava sa na vrstvu pohľadu. Spája pohľad a model cez dvojstrannú väzbu (anglicky two-way binding), ako je vidieť na obrázku \ref{pic:mvvm}. Ostatné funkcionality SPA, ako smerovanie a úložisko(ďalej označované aj ako store) môžu byť doplnené cez pomocné knižnice.
     \begin{figure}[!hbt]
         \centering
         \includegraphics[scale=0.2]{obrazky/mvvm.png}
@@ -82,19 +82,19 @@ Komponenty hrajú vo Vue.js veľmi dôležitú rolu, umožňujú tvorbu vysoko �
 \subsection*{Registrovanie komponentov}
 Existujú dva postupy registrovania jednotlivých komponentov: \textit{lokálne} a \textit{globálne}. Lokálne komponenty je potrebné pred každým použitím importovať, narozdiel od globálnych, ktoré stačí zaregistrovať raz a môžu byť použité v šablóne hociktorej komponenty. 
 
-Typický príklad pre globálnu komponentu je dizajnový prvok ako napríklad animácia pri načítaní údajov, takzvaný spinner. Tento typ animácie sa používa pri každom načítaní údajov, na viacerých miestach v aplikácii. Aby sme ho nemuseli po každom importovať stačí keď si ho raz globálne zaregistrujeme a môžme ho voľne používať. 
+Typický príklad pre globálnu komponentu je dizajnový prvok, ako napríklad animácia pri načítaní údajov, označovaný ako spinner. Tento typ animácie sa používa pri každom načítaní údajov, na viacerých miestach v aplikácii. Aby sme ho nemuseli po každom importovať stačí keď si ho raz globálne zaregistrujeme a môžme ho voľne používať. 
 
-Príklad lokálnej komponenty je formulár pre registrovanie užívateľa, ktorý sa pravdepodobne použije iba raz a nepotrebujeme ho mať dostupný v celej aplikácii.
+Príklad lokálnej komponenty je formulár pre registrovanie užívateľa, ktorý sa pravdepodobne použije iba raz a nepotrebujeme mať k nemu prístup v celej aplikácii.
 
 \subsection*{Komunikácia medzi komponentami}
-Komponenty začnú byť viac užitočné pri vymieňaní údajov medzi sebou. Štandardne, každá jedna je izolovaná, čo znamená, že nemá prístup k rodičovským údajom. Majme komponentu pre stručný výpis informácií o prezentácii, po kliknutí na ňu sa zobrazí ďalšia komponenta s detailným výpisom. Pri tomto príklade potrebujeme predať informácie o prezentácii z jednej komponenty na druhú. Na komunikáciu medzi rodičom a potomkom sa používa \texttt{props} a metóda \texttt{\$emit}.
+Komponenty začnú byť ešte viac užitočné pri vymieňaní údajov medzi sebou. Štandardne, každá jedna komponenta je izolovaná, čo znamená, že nemá prístup k rodičovským údajom. Majme komponentu pre stručný výpis informácií o prezentácii, po kliknutí na ňu sa zobrazí ďalšia komponenta s detailným výpisom. Pri tomto príklade potrebujeme predať informácie o prezentácii z jednej komponenty na druhú. Na komunikáciu medzi rodičom a potomkom sa používa \texttt{props} a metóda \texttt{\$emit}.
 
 Props sú atribúty, ktorým vieme nastaviť hodnoty. Slúžia na predanie údajov z rodiča na potomka. Po nadobudnutí hodnoty sa z nich stanú premenné použiteľné v komponente. Počet props nie je obmedzený a prijíma ľubovolný typ údajov.
 
-Metóda \$emit slúži na komunikáciu opačným smerom. Pomocou tejto metódy vieme vytvoriť vlastnú udalosť, ktorú rodič môže odpočúvať. Majme komponentu potomka v ktorej sa nachádza tlačítko. Kliknutím na tlačítko sa zavolá metóda \$emit do ktorej sa predá meno udalosti a ľubovolný údaj. Rodičovská komponenta môže odchytiť túto udalosť a reagovať na ňu. Vysielanie udalostí je užitočné keď máme viacero potomkov s rovnakou logikou, týmto spôsobom nemusia všetky tieto komponenty obsahovať tú istú logiku, stačí keď bude implementovaná iba v rodičovskej komponente a pristúpi sa k nej cez \$emit.
+Metóda \$emit slúži na komunikáciu opačným smerom. Pomocou tejto metódy vieme vytvoriť vlastnú udalosť, ktorú rodič môže odpočúvať. Majme komponentu potomka v ktorej sa nachádza tlačítko. Kliknutím na tlačítko sa zavolá metóda \$emit do ktorej sa predá meno udalosti a voliteľné dáta. Rodičovská komponenta môže odchytiť túto udalosť a reagovať na ňu. Vysielanie udalostí je užitočné keď máme viacero potomkov s rovnakou logikou, týmto spôsobom nemusia všetky tieto komponenty obsahovať tú istú logiku, stačí keď bude implementovaná iba v rodičovskej komponente a pristúpi sa k nej cez \$emit.
 
 \subsection*{Životný cyklus komponenty}
-Vo Vue.js každá komponenta je samostatná Vue inštancia\footnote{Jeden konkrétny exemplár triedy} a každá inštancia má svoj životný cyklus. Životný cyklus komponenty sa skladá z niekoľkých krokov, ako napríklad jej vytvorenie, pripevnenie inštancie k DOM\footnote{Objektový model HTML dokumentu}, aktualizácia DOM-u pri zmene údajov alebo jej zrušenie. Vývojári majú pri každom kroku možnosť pridania vlastného kódu cez funkcie \texttt{lifecycle hooks}. Medzi najpoužívanejšie patria:
+Vo Vue.js každá komponenta je samostatná Vue inštancia\footnote{Jeden konkrétny exemplár triedy} a každá inštancia má svoj životný cyklus. Životný cyklus komponenty sa skladá z niekoľkých krokov, ako napríklad jej vytvorenie, pripevnenie inštancie k DOM\footnote{Objektový model HTML dokumentu}, aktualizácia DOM-u pri zmene údajov alebo jej zrušenie. Vývojári majú pri každom kroku možnosť pridania vlastného kódu cez \texttt{funkcie životného cyklu (lifecycle hooks)}. Medzi najpoužívanejšie patria:
     \begin{itemize}
         \item\texttt{beforeCreated} - Volá sa hneď po inicializácii inštancie, ktorá zatiaľ nič neobsahuje.
         \item\texttt{created} - Pri tomto kroku sa dokončilo nastavenie pozorovania dát, computed premenných, metód a udalostí. Zatiaľ nemáme prístup k DOM. Môže sa použiť pre registrovanie vlastných udalostí.
@@ -112,21 +112,51 @@ Pri použití Composition API, o ktorom si povieme viac v sekcii \ref{compositio
         \centering
         \includegraphics[scale=0.3]{obrazky/lifecycle.png}
         \caption{Graf životného cyklu komponenty\cite{vue-guide}.}
-        \label{pic:components}
+        \label{pic:hooks}
     \end{figure}
 
 \subsection*{Šablóna}
-Komponenta sa vykresľuje cez HTML šablónu. Okrem základnej funkcionality jazyka HTML umožňuje aj výpis statických aj dynamických hodnôt, dynamickú aktualizáciu CSS štýlov a tried, použitie podmienok na obmedzenie vykresľovania a použitie cyklov pre prechádzanie hodnôt v poli. V šablóna má vývojár prístup k premenným aj metódam. Obsah šablóny sa musí nachádzať medzi značkou \texttt{<template>}.
+Komponenta sa vykresľuje cez HTML šablónu. Okrem základnej funkcionality jazyka HTML umožňuje aj výpis statických aj dynamických hodnôt, dynamickú aktualizáciu CSS štýlov a tried, použitie podmienok na obmedzenie vykresľovania a použitie cyklov pre prechádzanie hodnôt v poli. V šablóne má vývojár prístup k premenným aj metódam v súbore. Obsah šablóny sa musí nachádzať medzi značkou \texttt{<template>}.
 
 \subsection{Composition API}
 \label{compositionapi}
-TODO
+Vue.js verzia 2 priniesla funkcionalitu mixinov. Mixiny boli hlavným nástrojom pre vyčlenenie jednotlivých častí logiky komponenty do znovupoužitelných celkov. Umožňujú tvorbu premenných, funkcií a kódov vo funkciách životného cyklu, rovnakým spôsobom ako v komponentoch. Mixiny avšak spôsobujú viacero konfilktov. Pri ich importovaní sa premenné a funkcie z mixinu zlúčia do súboru komponenty a môžu vzniknúť konflikty rovnakého pomenovania. Ďalším významným problémom je limitovaná znovupoužitelnosť. Mixiny nepodporujú predávanie parametrov pre zmenu logiky, tým pádom majú zredukovanú flexibilitu.
+
+Všetky tieto problémi sa nástupom Composition API vyriešili. Composition API rovnako ponúka vyčlenenie častí logiky a ich znovupoužitie. Avšak neslúži iba pre znovupoužitelnosť, vyčleniť sa môže aj logika, ktorá v komponente zaberá príliš veľa miesta.  Výsledkom je prehľadnejšia komponenta v ktorej sa jednoduchšie orientuje. Súbor, ktorý obsahuje vyčlenenú logiku sa označuje ako \texttt{skladateľný(composable)}. Composition API poskytuje vo vyčlenených súboroch rovnaké funkcionality ako v komponentoch, možnosť deklarovania reaktívnych premenných, computed premenných, funkcií, sledovanie premenných, prístup ku kontextu aplikácie a k funkciám životného cyklu.
+
+Začiatočným bodom v Composition API je funkcia \texttt{setup}. Setup funkcia sa vykoná pred vytvorením komponenty, hneď jak sa atribúty \texttt{props} spracujú. Funkcia prijíma props a kontext aplikácie ako parameter. Všetko čo sa z funkcie vracia je dostupné v komponente a aj v šablóne komponenty. 
+
+\subsection*{Reaktívne premenné}
+Composition API umožňuje vytváranie reaktívnych premenných pomocou funkcie \texttt{ref}. Reaktívne premenné slúžia na automatické prekreslenie šablóny pri ich zmene. Príklad zápisu: 
+    \begin{verbatim}const currentSlide = ref<number>(1)\end{verbatim}
+Ref zoberie danú hodnotu a zabalí ju do \texttt{Proxy} objektu, pomocou ktorej Vue reaguje na zmeny. K samostatnej hodnote objektu sa pristupuje cez atribút \texttt{.value} a cez rovnaký atribút sa taktiež hodnota upravuje. Kvôli tomu sa premenná deklaruje ako konštanta, lebo pri modifikácii sa upravuje hodnota v objektu a nie celý objekt. V šablóne sa k hodnote pristupuje rovno cez objekt a nie je potrebné použiť atribút \texttt{.value}. 
+
+Composition API ponúka taktiež funkciu \texttt{reactive} pre reaktívny zápis premenných. Príklad použitia:
+    \begin{verbatim}const presentation = reactive<Presentaion>({
+        title: "Moja prezentácia",
+        slides: ["Stránka 1", "Stránka 2"]
+}) \end{verbatim}
+Funkcia zoberie objekt a každú jednu položku priradí do Proxy objektu. Logika za funkciou je pomerne rovnaká ako pri \texttt{ref}, rozdiel je pri prístupe k jednotlivým položkám a ich hodnotám, kde pri \texttt{reactive} nie je potrebné uviesť atribút \texttt{.value}. Pri použití v šablóne je potrebné uviesť objekt aj atribút, napríklad \texttt{presentaton.title}. Tento zápis sa dá zjednodušiť pomocou funkcie \texttt{toRefs}, táto funkcia vyžaduje reaktívny objekt ako parameter a používa sa pri vrátení hodnôt vo funkcii \texttt{setup}. Funkcia \texttt{toRefs} zoberie objekt a vráti každý jeden atribút ako samostatný \texttt{ref} objekt, týmto spôsobom sa k premennej v šablóne pristupuje iba cez atribút, napríklad \texttt{title}. Pomocou \texttt{reactive} vieme jednotlivé premenné ktoré súvisia so sebou zoskupiť do jedného objektu pre prehľadnejšiu orientáciu v zdrojovom kóde. 
+
+Ako je v hore uvedených príkladoch vidieť, obe reaktívne funkcie podporujú typovanie pomocou TypeScriptu. Typ sa uvádza medzi zátvorky \texttt{<} a \texttt{>}.
 
 \subsection{Nuxt.js}
-TODO
+Nuxt.js je nadstavbou Vue.js. Framework zjednodušuje vývoj univerzálnych a jednostránkových Vue aplikácií. Ako už bolo spomenuté, Vue.js aplikácie sú jednostránkové, obsahujú iba jeden HTML dokument \texttt{index.html}. Obsah tohto súboru sa mení podľa potreby pomocou JavaScriptu. Tým pádom na serveri je dostupná iba jedna stránka aplikácie, ktorá je práve aktívna. Tento prístup zabraňuje internetovým vyhľadávačom(SEO) nájsť ostatné stránky aplikácie podľa vyhľadávanej frázy. Vyhľadávač je program(robot), ktorý hľadá stránky, alebo dokumenty, ktoré obsahujú vyhľadávané slovo, alebo celú frázu. Podľa takýchto robotov funguje aj najpopulárnejší internetový vyhľadávač Google. Nuxt.js poskytuje riešenie na tento problém vykreslovaním obsahu na strane servera, týmto uľahčuje optimalizáciu webu pre vyhľadávače(\texttt{SEO}).
+
+Hlavným dôvodom použitia Nuxt.js pri tomto projekte je zjednodušený vývoj pre programátora. Framework poskytuje jednoduchú inštaláciu projektu, vytvorí základnú štruktúru aplikácie, zabezpečuje smerovanie a kompiláciu aplikácie pomocou Webpacku a Babela. Obsahuje moduly pre jednoduchú autentifikáciu užívateľa, úložisko, HTTP komunikáciu a mnoho ďalších. Pomocou týchto modulov sa dá vyhnúť nadbytočnému boilerplate kódu. Vývojárom poskytuje vývojové prostredie, ktoré sa automaticky aktualizuje pri zmene v zdrojovom kóde.
 
 \subsection{Reveal.js}
-TODO
+Reveal.js je nástroj pre vytváranie prezentácií v prehliadači pomocou webových technológií. Zdrojový kód projektu je voľne dostupný pre verejnosť. Framework sa inštaluje cez správcu balíkov \texttt{npm}. Použitie frameworku je veľmi jednoduché, celková prezentácia musí byť v šablóne zabalené do bloku s triedou \texttt{.reveal}. Stránky prezentácie musia patriť pod blok s triedou \texttt{.slides} a obsah jednotlivých stránok musí byť v značke \texttt{<section>}. Jednoduchý príklad použitia:
+
+    \begin{verbatim}
+    <div class="reveal">
+        <div class="slides">
+            <section>Stránka 1</section>
+            <section>Stránka 2</section>
+        </div>
+    </div>
+    \end{verbatim}
+
 
 \subsection{Ostatné balíčky a knižnice}
 \subsection*{auth-next}
