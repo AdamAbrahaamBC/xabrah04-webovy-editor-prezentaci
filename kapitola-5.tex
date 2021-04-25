@@ -183,6 +183,7 @@ Dotazovanie a logika nad databázou sa nachádza v adresári \texttt{repository}
 K aplikačnému rozhraniu sa pristupuje cez trasu \texttt{api}. Na backende sa pracuje s autentifikáciou, užívateľmi a prezentáciami. Pre každú jednu čast je definovaná zvlášť trasa. Základná definícia sa implementovala v súbore \texttt{server.ts}. Zadefinovanie koncových bodov a priradenie middlewaru k nim sa nachádza v adresári \texttt{routes}. Funkcie, ktoré sa zaoberajú spracovaním dotazov na jednotlivé koncové body od klienta sa nachádzajú v adresári \texttt{controllers}. Funkcie v týchto súboroch majú na starosť spracovanie jednotlivých dotazov, na základe požiadavkov volajú dotyčné funkcie v repozitároch a generujú odpoveď s patričným stavovým kódom.
 
 \subsection{Autentifikácia užívateľa}
+\label{jwtauth}
 Autentifikácia užívateľa sa rieši cez JSON Web Žetóny(token). Pri prihlásený sa porovná užívateľom zadané heslo s heslom v databáze. Pri zhode sa podpíše token unikátnym identifikátorom užívateľa a tajným heslom, ktorý bol náhodne vygenerovaný špeciálnym generátorom a je uchovaný v \texttt{.env} súbore. Na podpísanie tokenu sa používa hašovací algoritmus \texttt{HMAC SHA256}.
 Token sa pošle spať HTTP odpoveďou. Autentifikačný modul v klientskej časti aplikácie token pridá do cookies a je naďalej posielaný pri každej komunikácii so serverom v hlavičke HTTP dotazu.
 

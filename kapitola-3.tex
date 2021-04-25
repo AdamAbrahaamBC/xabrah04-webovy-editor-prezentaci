@@ -179,23 +179,43 @@ TODO
 
 \subsection{Node.js a Express.js}
 \label{node}
-TODO
+Node.js\cite{nodejs} je spúšťacie prostredie(runtime environment) pre aplikácie napísané v jazyku JavaScript mimo webového prehliadača. Je zakladaný na motore Chrome V8 JavaScript, čo znamená že sa prostredie správa rovnako ako webový prehliadač Google Chrome. Node.js sa najčastejšia využíva pri tvorbe serverovej časti webových aplikácií. Prostredie je poháňané asynchronnými udalosťami, ktoré umožňujú tvorbu vysoko škálovateľných a výkonných aplikácií, čo bolo primárnym dôvodom voľby tohto nástroja pre backend projektu.
+
+Za vysokou výkonnosťou stojí jeho jadro, ktoré obsahuje slučku udalostí(event loop). Do tejto slučky sa priraďujú všetky požiadavky, ktoré sú nasledovne priradené k asynchronným vláknam. Pri Node.js sa netreba obávať kvôli uviaznutiam(deadlockom), kvôli funkcionalite neblokujúci Vstup/Výstup. Operácie, ako čítanie a zápis do databáze, alebo HTTP požiadavky sú riešené cez tieto udalosti, ktoré umožňujú paralelné spracovanie požiadavkov. Napríklad majme dvoch užívateľov, ktorý si naraz chcú zobraziť informácie o prezentácii. Pomocou neblokujúceho Vstupu/Výstupu užívateľ2 si môže požiadať o dáta z databáze bez toho, aby sa počkalo na spracovanie požiadavku užívateľa1. Celá architektúra Node.js je grafický znázornená na obrázku \ref{pic:nodejs}.
+
+    \begin{figure}[!hbt]
+        \centering
+        \includegraphics[scale=0.5]{obrazky/nodejs.png}
+        \caption{Architektúra Node.js.}
+        \label{pic:nodejs}
+    \end{figure}
+    
+\subsection*{Express.js}
+Express.js\cite{expressjs} je najpopulárnejším webovým frameworkom založeným na Node.js. Je minimalistický a flexibilný. Poskytuje robustnú škálu funkcionalít pre tvorbu serverovej časti webových aplikácií a množstvo HTTP utilít pre rýchlu a jednoduchú tvorbu aplikačného rozhrania. Umožňuje spracovanie jednotlivých HTTP dotazov na rôzne URL adresy.
 
 \subsection{Aplikačné rozhranie}
 TODO
 
 \subsection{Ostatné balíčky a knižnice}
 \subsection*{bcrypt}
+Bcrypt je knižnica pre Node.js, ktorá umožňuje hašovanie hesiel.
 
 \subsection*{cors}
+Knižnica poskytuje middleware pre Express.js, ktorý povoluje zdieľanie zdrojov medzi inými doménami(cross-origin resource sharing).
 
-\subsection*{dayjs}
+\subsection*{day.js}
+Day.js je minimalistická javaScript knižnica pre prácu s časom a dátumom.
 
 \subsection*{dotenv}
+Modul načíta premenné zo súboru prostredia \texttt{.env} a prístupní ich cez objekt \texttt{process.env}.
 
 \subsection*{jsonwebtoken}
-
-\subsection*{nodemon}
-"nodemon -x ts-node ./src/server.ts",
+Knižnica implementuje autentifikáciu užívateľa cez JSON Web Token. Implementácia autentifikácie pomocou tejto knižnice je podrobnejšie popísana v sekcii \ref{jwtauth}.
 
 \subsection*{ts-node, tslint a typescript}
+Knižnice ts-node a typescript slúžia pre spustenie prostredia Node.js s podporou pre jazyk TypeScript. Knižnica tslint je nástroj pre analýzu zdrojového kódu v jazyku TypeScript.
+
+\subsection*{nodemon}
+Nodemon je nástroj pre vytvorenie vývojového prostredia Node.js aplikácie, ktorý automaticky aktualizuje aplikáciu pri detekovaní zmeny v zdrojových súboroch. Vývojové prostredie sa vytvorí pomocou príkazu v terminály:
+\begin{verbatim}nodemon ts-node ./src/server.ts
+\end{verbatim}
