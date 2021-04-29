@@ -1,7 +1,9 @@
 \chapter{Implementácia}
+\label{kapitola5}
 Táto kapitola popisuje čitateľovi samotnú implementáciu aplikácie. Čitateľ sa oboznámi s použitými nástrojmi pri tvorení aplikácie a s postupom implementácie frontendovej a backendovej časti. Prvým bodom implementácie bolo vytvorenie zložky mono-repozitára zahrňujúci obe časti aplikácie.
 
 \section{Git a GitHub}
+\label{git}
 Pred začatím písania zdrojového kódu sa najprv spojazdnil verzovací systém Git cez GitHub. Cieľom bolo verzovanie samotného zdrojového kódu aj dokumentácie. Pre jednoduchšiu orientáciu v repozitároch sa vytvorila GitHub organizácia, ktorá obsahuje monorepozitár pre zdrojový kód a repozitár pre dokumentáciu na jednom mieste. Monorepozitár je repozitár obsahujúci viacero projektov, v tomto prípade projekt klienta a servera. Organizácia aj repozitáre sú verejne dostupné pod odkazom:
     \begin{verbatim}
         https://github.com/AdamAbrahaamBC
@@ -29,6 +31,7 @@ K jednotlivým úlohám sú pridelené štítky. Štítky označujú o aký typ 
     \end{figure}
 
 \section{Implementácia frontendu}
+\label{impfrontend}
 Implementácia frontendu sa začala stiahnutím \texttt{Node.js}. Node.js obsahuje nástroj \texttt{npx} pre spúšťanie balíčkov. Pomocou npx sa vytvoril Nuxt.js projekt cez terminálový príkaz: \texttt{npx create-nuxt-app <názov-projektu>}. 
 
 \vspace{5mm}
@@ -170,6 +173,7 @@ Komponenta \texttt{viewer} slúži na zobrazenie sformátovaného Markdown obsah
 Užívateľ má možnosť exportovania prezentácie v statickom PDF formáte. Reveal.js poskytuje špeciálnu šablónu pre formát PDF. Po kliknutí na tlačítko \texttt{download}, alebo na tlačítko \texttt{export} na domovskej stránke, alebo v bočnom panely editora aplikácia presmeruje užívateľa do prezentačného módu, kde sa mu zobrazí dialóg pre správu tlače. V dialógu je potrebné zvoliť možnosť \texttt{Uložiť ako PDF}.
 
 \section{Implementácia backendu}
+\label{impbackend}
 Implementácia backendu začala inicializáciou projektu v mono-repozitári aplikácie cez termináloví príkaz \texttt{npm init -Y}. Značka \texttt{-Y} slúži pre automatické vytvorenie súboru \texttt{package.json} s predvolenými hodnotami. Po inicializácii projektu sa nainštaloval balík pre server \texttt{express} a balíky pre podporu TypeScriptu \texttt{typescript} a \texttt{ts-node}.
 
 Celková implementácia a logika serverovej časti sa nachádza v adresári \texttt{server/src}. Začiatočným bodom pri spustení backendu je súbor \texttt{server.ts} nachádzajúci sa v hlavnom adresári. Súbor obsahuje triedu pomocou ktorej sa spúšťa serverová časť. Pri vytvorení novej inštancie triedy sa nastavia všetky konfigurácie pre beh servera, ako port na odpočúvanie, explicitné povolenie JSON obsahu, podpora \texttt{.env} súborov a povolenie \texttt{CORS}. V triede sa pripája ku cloudovej MongoDB databáze cez pripojovací reťazec a inicializujú sa trasy aplikácie. Podrobnejšia implementácia trias sa nachádza v adresári \texttt{routes}. 

@@ -1,5 +1,14 @@
 \chapter{Úvod}
-Táto bakalárska práca sa zaoberá implementáciou webovej aplikácie pre správu prezentácií. Hlavnou výhodou oproti konkurenčným riešeniam je možnosť kopírovania snímok medzi prezentáciami a verzovania jednotlivých prezentácií. Týmto spôsobom sa vyhneme zbytočnému ukladaniu našej práce pod názvy \texttt{xy-final}, \texttt{xy-final-final} a podobne, s ktorými sme sa už určite viacerí stretli, a máme všetky naše predošlé verzie práce dostupné na jednom mieste . Cieľom aplikácie je umožniť užívateľom vytvárať a spravovať prezentácie pomocou značkovacieho jazyka Markdown.
+Táto bakalárska práca sa zaoberá implementáciou webovej aplikácie pre správu webových prezentácií. Hlavnou výhodou oproti konkurenčným riešeniam je možnosť kopírovania snímok medzi prezentáciami a verzovania jednotlivých prezentácií. Týmto spôsobom sa vyhneme zbytočnému ukladaniu našej práce pod názvy \texttt{xy-final}, \texttt{xy-final-final} a podobne, s ktorými sme sa už určite viacerí stretli. Aplikácia umožňuje uchovať všetky naše predošlé verzie práce, ktoré sú dostupné na jednom mieste. Cieľom aplikácie je umožniť užívateľom vytváranie a spravovanie prezentácií pomocou značkovacieho jazyka Markdown.
 
-TODO Kapitoly...
+Práca sa skladá zo siedmich kapitol. Druhá kapitola(\ref{kapitola2}) oboznámi čitateľa so súčasnými webovými technológiami. Popisuje ich účel a porovnáva ich vlastnosti. 
 
+Tretia kapitola(\ref{kapitola3}) sa už zaoberá použitými technológiami v aplikácii. Na úvod sa opisuje nerelačná dokumentová databáza MongoDB(\ref{mongodb}) a pomocná knižnica pre modelovanie objektov Mongoose(\ref{mongoose}). Po popise zvolenej databáze nasleduje úvod do TypeScriptu(\ref{typescript}), pri ktorom sa čitateľ zoznámi s jednotlivými typovými systémami a ich výhodami. Ďalej v kapitole sa uvádzajú použité frontendové technológie, výhody CSS preprocessora Sass(\ref{sass}) a CSS rámca Buefy(\ref{buefy}). V kapitole je popísaná myšlienka za voľbou frontend rámca Vue.js(\ref{vue}) s nadstavbou Nuxt.js(\ref{nuxt}) a technológiou Composition API(\ref{compositionapi}). Pre serverovú časť sa použil Node.js(\ref{node}) s rámcom Express.js(\ref{express}). Aplikačné rozhranie sa realizovalo pomocou architektúry REST(\ref{api}).
+
+Štvrtá kapitola(\ref{kapitola4}) popisuje celkovú štruktúru aplikácie(\ref{architecture}). Nachádza sa v nej podrobný návod na použitie aplikácie(\ref{pouzitie}), myšlienka za návrhom užívateľského rozhrania(\ref{navrhui}) a databáze(\ref{navrhdb}). Čitateľ sa oboznámi s výhodami vzoru repozitára(\ref{repository}) a s tabuľkou koncových bodov aplikácie(\ref{table:endpoints}) s ich popisom.
+
+Piata kapitola(\ref{kapitola5}) sa zaoberá konkrétnou implementáciou klientskej(\ref{impfrontend}) a serverovej(\ref{impbackend}) časti aplikácie. Popisuje sa v nej organizácia úloh a verzovanie zdrojového kódu cez nástroj GitHub(\ref{git}).
+
+Dôležitou súčasťou implementácie bolo priebežné testovanie aplikácie, pre zaručenie očakávaného správania. Popis typov testovaní a použitých nástrojov sa nachádza v kapitole \ref{kapitola6}.
+
+Práca je ukončená kapitolou \ref{kapitola7}, zhrnutím dosiahnutých výsledkov a nápadom na možné rozšírenie aplikácie do budúcna. 

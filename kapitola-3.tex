@@ -1,4 +1,7 @@
 \chapter{Použité webové technológie}
+\label{kapitola3}
+V tejto kapitole sa čitateľ oboznámi s použitými webovými technológiami v aplikácie. Na úvod sa uvádza popis zvolenej databáze
+
 \section{Databáza}
 V tejto sekcii sa čitateľ zoznámi s NoSQL databázou MongoDB a knižnicou Mongoose.
 
@@ -7,6 +10,7 @@ V tejto sekcii sa čitateľ zoznámi s NoSQL databázou MongoDB a knižnicou Mon
 MongoDB\cite{mongodb} je open-source nerelačná databáza založená na dokumentoch. Namiesto používania tradičných tabuliek a riadkov relačnej databáze, MongoDB vytvára kolekcie ktoré sa skladajú z dokumentov vo formáte JSON. Jednotlivé dokumenty sa skladajú z párov kľúč-hodnota. Každý dokument môže mať rozlišný počet položiek. Veľkosť a obsah jednotlivých dokumentov sa môže taktiež od seba líšiť. Štruktúra dokumentu sa viac podobá štruktúre, ktorú vývojári vytvárajú pri programovaní tried a objektov. 
 
 \subsection{Mongoose.js}
+\label{mongoose}
 Mongoose.js je Node.js knižnica pre dátové modelovanie objektov pre MongoDB. Uľahčuje užívateľom prácu s MongoDB prekladaním dokumentov z databáze na objekty. Spravuje vzťahy medzi dátami, poskytuje validáciu schémy, typovanie a používa sa pre modelovanie dátových modelov na MongoDB objekty. Poskytuje dopytovacie funkcie nad modelmi, pomocou ktorých sa získavajú a ukladajú dáta do databáze. Tieto funkcie sú reťazovatelné(chainable). 
 
 Mongoose používa schémy pre modelovanie a správu dát v MongoDB. Schéma popisuje atribúty jednotlivých položiek s ktorými aplikácia pracuje, napríklad jeho dátový typ, či je položka povinná, alebo voliteľná. 
@@ -38,14 +42,17 @@ Kaskádové štýly\cite{css}, alebo skrátene CSS je rozšírenie jazyka HTML. 
 V súčasnej dobe sa často používajú preprocesory pri práci s CSS. V aplikácii sa využíva preprocesor \texttt{Sass}. Preprocesor\cite{sass} je program ktorého, výstup je spracovaný ďalším programom, t.j. štýly napísané v Sass sú spracované ďalším programom z čoho vznikne CSS. Hlavným dôvodom ich použitia je prehľadnosť kódu a súborov. Medzi najpopulárnejšie preprocesory patrí Sass, Less a Stylus.
 
 \subsection*{Sass}
+\label{sass}
 Sass\cite{sass} je najstarším CSS preprocesorom. Je ľahko naučiteľný a pomerne jednoduchý jazyk. Medzi jeho hlavné výhody patrí vytváranie premenných a uchovávanie hodnôt do nich, vytváranie vnorených štýlov, matematických operácií, cyklov a funkcií. Sass naďalej podporuje importovanie externých súborov, čo umožňuje rozdelenie štýlov do rôznych logických častí. Jednotlivé celky sa potom preprocesorom skompilujú do jedného CSS súboru. 
 
 \subsection*{Buefy}
+\label{buefy}
 Buefy poskytuje predpripravené komponenty pre užívateľské rozhranie. Uľahčuje prácu vývojárom so štýlovaním základných elementov dokumentu. V aplikácii sa využíva komponenta pre tlačítka, skrývanie obsahu, dialógy, kolónky vstupu užívateľa, vykreslovanie ikón, animáciu načítania, navigačný panel a bočný panel. Zdrojový kód frameworku je voľne dostupný pre verejnosť. Každá komponenta je responzívna, sama sa prispôsobuje rôznym rozlíšeniam obrazovky a týmto uľahčuje vývoj aj pre mobilnú platformu. 
 
 Framework je vytvorený vo Vue.js a zakladá sa na CSS knižnici Bulma. Bulma je taktiež open-source knižnica, ktorá je postavená na CSS architektúre \texttt{flexbox}. Samotná knižnica poskytuje CSS triedy pre štýlovanie HTML dokumentu. Buefy pomocou týchto tried vytvorí jednotlivé komponenty užívateľského rozhrania pre Vue.js, ktoré sú potom jednoducho použiteľné v aplikácii. Tieto komponenty sa označujú predponou \texttt{b-}, napríklad \texttt{<b-button></b-button>}.
 
 \subsection{Vue.js}
+\label{vue}
 Vue.js\cite{vue-guide} patrí medzi najpopulárnejšie nástroje pre tvorbu jednostránkových aplikácii. Je výkonný, rýchly a minimalistický. Veľkou výhodou je, že patrí medzi progresívne frameworky, t.j. našu aplikáciu vieme rozdeliť na viacero častí, ktoré môžu byť samostatne vyvíjané. Stal sa jedným z obľúbených kvôli jeho jednoduchosti. Má veľmi prehľadnú a pestrú dokumentáciu v anglickom aj čínskom jazyku.
 
 Framework bol vytvorený Evanom Youom, ktorý pracoval v Googlu a Meteoru. V Googlu začal používať AngularJS, ktorým sa inšpiroval, ale tento framework mu nevyhovoval kvôli jeho striktnému písaniu kódu. Jeho motiváciou bolo vziať najlepšie vlastnosti Angularu a vytvoriť z nich nástroj, ktorý mu zjednoduší a zefektívni prácu.
@@ -141,11 +148,13 @@ Funkcia zoberie objekt a každú jednu položku priradí do Proxy objektu. Logik
 Ako je v hore uvedených príkladoch vidieť, obe reaktívne funkcie podporujú typovanie pomocou TypeScriptu. Typ sa uvádza medzi zátvorky \texttt{<} a \texttt{>}.
 
 \subsection{Nuxt.js}
+\label{nuxt}
 Nuxt.js je nadstavbou Vue.js. Framework zjednodušuje vývoj univerzálnych a jednostránkových Vue aplikácií. Ako už bolo spomenuté, Vue.js aplikácie sú jednostránkové, obsahujú iba jeden HTML dokument \texttt{index.html}. Obsah tohto súboru sa mení podľa potreby pomocou JavaScriptu. Tým pádom na serveri je dostupná iba jedna stránka aplikácie, ktorá je práve aktívna. Tento prístup zabraňuje internetovým vyhľadávačom(SEO) nájsť ostatné stránky aplikácie podľa vyhľadávanej frázy. Vyhľadávač je program(robot), ktorý hľadá stránky, alebo dokumenty, ktoré obsahujú vyhľadávané slovo, alebo celú frázu. Podľa takýchto robotov funguje aj najpopulárnejší internetový vyhľadávač Google. Nuxt.js poskytuje riešenie na tento problém vykreslovaním obsahu na strane servera, týmto uľahčuje optimalizáciu webu pre vyhľadávače(\texttt{SEO}).
 
 Hlavným dôvodom použitia Nuxt.js pri tomto projekte je zjednodušený vývoj pre programátora. Framework poskytuje jednoduchú inštaláciu projektu, vytvorí základnú štruktúru aplikácie, zabezpečuje smerovanie a kompiláciu aplikácie pomocou Webpacku a Babela. Obsahuje moduly pre jednoduchú autentifikáciu užívateľa, úložisko, HTTP komunikáciu a mnoho ďalších. Pomocou týchto modulov sa dá vyhnúť nadbytočnému boilerplate kódu. Vývojárom poskytuje vývojové prostredie, ktoré sa automaticky aktualizuje pri zmene v zdrojovom kóde.
 
 \subsection{Reveal.js}
+\label{reveal}
 Reveal.js je nástroj pre vytváranie prezentácií v prehliadači pomocou webových technológií. Zdrojový kód projektu je voľne dostupný pre verejnosť. Framework sa inštaluje cez správcu balíkov \texttt{npm}. Použitie frameworku je veľmi jednoduché, celková prezentácia musí byť v šablóne zabalené do bloku s triedou \texttt{.reveal}. Stránky prezentácie musia patriť pod blok s triedou \texttt{.slides} a obsah jednotlivých stránok musí byť v značke \texttt{<section>}. Jednoduchý príklad použitia:
 
     \begin{verbatim}
@@ -191,10 +200,36 @@ Za vysokou výkonnosťou stojí jeho jadro, ktoré obsahuje slučku udalostí(ev
     \end{figure}
     
 \subsection*{Express.js}
+\label{express}
 Express.js\cite{expressjs} je najpopulárnejším webovým frameworkom založeným na Node.js. Je minimalistický a flexibilný. Poskytuje robustnú škálu funkcionalít pre tvorbu serverovej časti webových aplikácií a množstvo HTTP utilít pre rýchlu a jednoduchú tvorbu aplikačného rozhrania. Umožňuje spracovanie jednotlivých HTTP dotazov na rôzne URL adresy.
 
 \subsection{Aplikačné rozhranie}
-TODO
+\label{api}
+Aplikačné rozhranie je realizované pomocou architektúry REST. Skratka znamená Representation State Transfer, čiže reprezentačný prenos stavu. Architektúra umožňuje pristupovať k dátam a vykonávať nad nimi základné operácie, ako ich vytvorenie, čítanie, aktualizáciu a mazanie. Na prenos dát sa používajú metódy protokolu HTTP. Najčastejšie používané metódy sú:
+
+    \begin{itemize}
+        \item\texttt{GET} pre získanie dát.
+        \item\texttt{POST} pre vytváranie dát.
+        \item\texttt{DELETE} pre mazanie dát.
+        \item\texttt{PUT} pre upravovanie dát.
+    \end{itemize}
+    
+Protokol ponúka aj metódy \texttt{HEAD}, \texttt{PATCH}, \texttt{OPTIONS}, ktoré avšak nie sú často používané.
+
+\vspace{\baselineskip}
+
+Architektúra poskytuje pre každý jeden zdroj samostatný koncový bod cez ktorý sa dajú dáta spravovať. Tabuľka koncových bodov použitých v aplikácii s ich popisom sa nachádza v sekcii \ref{table:endpoints}.
+
+Aplikačné rozhranie musí splňovať nasledujúce požiadavky, aby bola považovaná za RESTful:
+
+    \begin{itemize}
+        \item\textbf{Klient-server architektúra} - cieľom je rozdeliť klientskú časť aplikácie od serverovej. Umožňuje nezávislý vývoj oboch častí aplikácie. Užívateľské rozhranie na viacerých platformách môže mať rovnaký backend.
+        \item\textbf{Bezstavová architektúra} - požiadavky na server musia obsahovať všetky potrebné informácie na ich spracovanie. Stav sa uchováva na strane klienta a nie na strane servera.
+        \item\textbf{Uchovávateľnosť v cache pamäti} - kvôli vysokému počtu požiadavkov, každý jeden požiadavok musí byť označený ako uložiteľný, alebo neuložiteľný do cashe pamäte. Výsledkom je zefektívnená výkonnosť servera.
+        \item\textbf{Vrstovateľnosť} - rozdelenie aplikácie do jednotlivých vrstiev, kvôli škálovateľnosti. Každá vrstva má svoj vlastný účel.
+        \item\textbf{Jednotné rozhranie} - základ architektúry, musí byť zadefinovaný spôsob komunikácie medzi klientom a serverom.
+        \item\textbf{Code on Demand} - voliteľný požiadavok architektúry. Umožňuje posielanie zdrojového kódu pre klienta, čím rozšíri jeho funkcionalitu.
+    \end{itemize}
 
 \subsection{Ostatné balíčky a knižnice}
 \subsection*{bcrypt}
@@ -204,7 +239,7 @@ Bcrypt je knižnica pre Node.js, ktorá umožňuje hašovanie hesiel.
 Knižnica poskytuje middleware pre Express.js, ktorý povoluje zdieľanie zdrojov medzi inými doménami(cross-origin resource sharing).
 
 \subsection*{day.js}
-Day.js je minimalistická javaScript knižnica pre prácu s časom a dátumom.
+Day.js je minimalistická JavaScript knižnica pre prácu s časom a dátumom.
 
 \subsection*{dotenv}
 Modul načíta premenné zo súboru prostredia \texttt{.env} a prístupní ich cez objekt \texttt{process.env}.
