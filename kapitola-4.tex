@@ -6,11 +6,11 @@ V tejto kapitole sa čitateľ zoznámi s návrhom celej aplikácie. V prvej sekc
 \label{pouzitie}
 Pri príchode na webovú stránku sa užívateľ ocitne na autentifikačnej stránka kde sa musí prihlásiť, alebo zaregistrovať, aby mohol postúpiť ďalej.
 
-Po úspešnom prihlásení užívateľ je presmerovaný na domovskú stránku. Na domovskej stránke má prístup k zoznamu vlastných prezentácií, ktoré už vytvoril. Vie si tu vytvoriť novú prezentáciu kliknutím na tlačítko \texttt{Create New}, alebo sa odhlásiť tlačítkom \texttt{Logout}. Zoznam obsahuje kartičky jednotlivých prezentácií so stručným opisom informácií. Užívateľ si vie zobraziť prezentáciu v prezentačnom móde cez tlačítko \texttt{View}, upraviť poslednú verziu cez tlačítko \texttt{Edit} a odstrániť celú prezentáciu tlačítkom \texttt{Delete}. Kliknutím na kartičku si vie zobraziť detailný popis prezentácie. V detailu má prístup k vytvoreným verziám a popisom k nim. Nachádza sa tu náhľad do stránok jednotlivých verzií pre uľahčenie voľby správnej verzie.
+Po úspešnom prihlásení užívateľ je presmerovaný na domovskú stránku. Na domovskej stránke má prístup k zoznamu vlastných prezentácií, ktoré už vytvoril. Vie si tu vytvoriť novú prezentáciu kliknutím na tlačítko \texttt{Create New}, alebo sa odhlásiť tlačítkom \texttt{Logout}. Zoznam obsahuje kartičky jednotlivých prezentácií so stručným popisom informácií. Kartička obsahuje tlačítko \texttt{Delete} pre odstránenie celej prezentácie. Kliknutím na kartičku sa zobrazí detailný popis prezentácie. V detaily má užívateľ prístup k vytvoreným verziám a popisom k nim. Nachádza sa tu náhľad do stránok jednotlivých verzií pre uľahčenie voľby správnej verzie. Užívateľ si vie zobraziť prezentáciu v prezentačnom móde cez tlačítko \texttt{View}, upraviť verziu cez tlačítko \texttt{Edit} a odstrániť verziu tlačítkom \texttt{Delete v\_}.
 
-Pri vytváraní novej prezentácie, alebo upravovaní už existujúcej nás aplikácie presmeruje na stránku editora. Editor obsahuje mnoho užitočných nástrojov pre zjednodušenie tvorby pomocou jazyka Markdown, ako napríklad typografické nástroje, vloženie zoznamov, tabuliek, obrázkov, odkazov a častí zdrojového kódu. Veľkou výhodou je výskyt náhľadu v editore, kde je hneď vidieť sformátovaný obsah stránky. V bočnom panelu má užívateľ možnosť sa vrátiť na domovskú stránku cez tlačítko \texttt{Home}. Po kliknutí na tlačítko \texttt{Save} sa zobrazí panel na uloženie prezentácie. Pri upravovaní prezentácie aplikácia ponúka úpravu názvu a pridanie popisu k verzii. Prezentáciu vie tvorca uložiť pod novou verziou, alebo môže aktualizovať práve upravovanú verziu. Kliknutím na tlačítko \texttt{Preview} sa aplikácia prepne do prezentačného módu. Prepínanie stránok v prezentačnom móde funguje pomocou klávesnicových šípok. 
+Pri vytváraní novej prezentácie, alebo upravovaní už existujúcej nás aplikácie presmeruje na stránku editora. Editor obsahuje mnoho užitočných nástrojov pre zjednodušenie tvorby pomocou jazyka Markdown, ako napríklad typografické nástroje, vloženie zoznamov, tabuliek, obrázkov, odkazov a častí zdrojového kódu. Veľkou výhodou je výskyt náhľadu v editore, kde je hneď vidieť sformátovaný obsah stránky. V bočnom panely má užívateľ možnosť sa vrátiť na domovskú stránku cez tlačítko \texttt{Home}. Po kliknutí na tlačítko \texttt{Save} sa zobrazí panel na uloženie prezentácie. Pri upravovaní prezentácie aplikácia ponúka úpravu názvu a pridanie popisu k verzii. Prezentáciu vie tvorca uložiť pod novou verziou, alebo môže aktualizovať práve upravovanú verziu. Kliknutím na tlačítko \texttt{Preview} sa aplikácia prepne do prezentačného módu. Prepínanie stránok v prezentačnom móde funguje pomocou klávesnicových šípok. 
 
-Tvorca si vie zobraziť panel so stránkami cez tlačítko \texttt{Slides}. Panel obsahuje zoznam jednotlivých stránok prezentácie. Ich poradie môže byť upravené pomocou technológie ťahaj-a-pusti (anglicky drag-and-drop). Užívateľ má možnosť prepnutia zoznamu stránok do mriežkového pohľadu(anglicky grid view), kde sa dá jednoduchšie orientovať a usporiadať jednotlivé stránky. Aplikácia umožňuje kopírovanie stránok medzi prezentáciami jednoduchým kliknutím na tlačítka \texttt{Kopírovať} a \texttt{Prilepiť}.
+Tvorca si vie zobraziť panel so stránkami cez tlačítko \texttt{Slides}. Panel obsahuje zoznam jednotlivých stránok prezentácie. Ich poradie môže byť upravené pomocou technológie ťahaj-a-pusti (drag-and-drop). Užívateľ má možnosť prepnutia zoznamu stránok do mriežkového pohľadu(grid view), kde sa dá jednoduchšie orientovať a usporiadať jednotlivé stránky. Aplikácia umožňuje kopírovanie stránok medzi prezentáciami jednoduchým kliknutím na tlačítka \texttt{Kopírovať} a \texttt{Prilepiť}.
 
 \section{Architektúra aplikácie}
 \label{architecture}
@@ -38,7 +38,7 @@ Každá stránka môže mať niekoľko potomkov. Potomok má rovnakú štruktúr
 
     \begin{figure}[!hbt]
         \centering
-        \includegraphics[scale=0.5]{obrazky/nuxt_struktura.png}
+        \includegraphics[scale=0.4]{obrazky/nuxt_struktura.png}
         \caption{Kompozícia pohľadu v Nuxt.js.}
         \label{pic:nuxt_strukture}
     \end{figure}
@@ -129,7 +129,7 @@ Kolekcia prezentácií uchováva dokumenty s informáciami o vytvorených prezen
 
     \begin{figure}[!hbt]
         \centering
-        \includegraphics[scale=0.6]{obrazky/databaza.png}
+        \includegraphics[scale=0.5]{obrazky/databaza.png}
         \caption{Znázornenie návrhu databáze.}
         \label{pic:database}
     \end{figure}
@@ -151,7 +151,7 @@ V aplikácii je implementovaný vzor repozitára. Tento vzor pomáha v odstráne
 .2 presentationRepository.
 .2 userRepository.
 }
-\vspace{5mm}
+\clearpage
 
 Repozitár užívateľa obsahuje následujúce metódy:
     \begin{itemize}
@@ -175,10 +175,10 @@ V repozitári prezentácie sa nachádzajú metódy:
         \item\texttt{deleteVersion} - odstránenie verzie prezentácie
     \end{itemize}
     
-\subsection*{Vrstva API}
-Vrstva API má za úlohu spracovávať dotazy od klienta na konkrétny koncový bod. Jednotlivé dotazy môžu obsahovať parametre v URI, takzvané query parametre, alebo parametre v tele dotazu. Pri úspešnom spracovaní dotazu API vráti HTTP odpoveď klientovi so správnym stavovým kódom \texttt{2xx}, kde čísla namiesto \texttt{x} sú doplnené podľa typu dotazu. Odpoveď môže obsahovať aj telo s obsahom. V aplikácii sa posiela obsah vo formáte JSON. Vrstva naďalej kontroluje či je dotaz správny, či je užívateľ prihlásený a má dostačujúce oprávnenie na vykonanie dotazu, alebo či požadované dáta existujú. Pri odchytení chyby API vráti chybovú hlášku so stavovým kódom \texttt{4xx} 
+    \subsection*{Vrstva API}
+Vrstva API má za úlohu spracovávať dotazy od klienta na konkrétny koncový bod. Jednotlivé dotazy môžu obsahovať parametre v URI, takzvané query parametre, alebo parametre v tele dotazu. Pri úspešnom spracovaní dotazu API vráti HTTP odpoveď klientovi so správnym stavovým kódom \texttt{2xx}, kde čísla namiesto \texttt{x} sú doplnené podľa typu dotazu. Odpoveď môže obsahovať aj telo s obsahom. V aplikácii sa posiela obsah vo formáte JSON. Vrstva naďalej kontroluje či je dotaz správny, či je užívateľ prihlásený a má dostačujúce oprávnenie na vykonanie dotazu, alebo či požadované dáta existujú. Pri odchytení chyby API vráti chybovú hlášku so stavovým kódom \texttt{4xx}.
 
-\begin{table}%[H]
+\begin{table}[H]
     \centering
     \caption{Koncové body}
     \label{table:endpoints}
@@ -202,5 +202,3 @@ Vrstva API má za úlohu spracovávať dotazy od klienta na konkrétny koncový 
     \hline
     \end{tabular}
 \end{table}
-
-    
