@@ -1,20 +1,20 @@
 \chapter{Návrh riešenia}
 \label{kapitola4}
-V tejto kapitole sa čitateľ zoznámi s návrhom celej aplikácie. V prvej sekcii sú rozobrané prípady použitia aplikácie. Ďalej sa čitateľ dočíta o návrhu architektúry systému, o návrhu užívateľského rozhrania, o návrhu databáze a na záver o návrhu serverovej aj klientskej časti aplikácie.
+V tejto kapitole sa čitateľ zoznámi s návrhom celej aplikácie. V prvej sekcii sú rozobrané prípady použitia aplikácie. Ďalej sa čitateľ dočíta o návrhu architektúry systému, o návrhu užívateľského rozhrania, o návrhu databázy a na záver o návrhu serverovej aj klientskej časti aplikácie.
 
 \section{Použitie aplikácie}
 \label{pouzitie}
-Pri príchode na webovú stránku sa užívateľ ocitne na autentifikačnej stránka kde sa musí prihlásiť, alebo zaregistrovať, aby mohol postúpiť ďalej.
+Pri príchode na webovú stránku sa užívateľ ocitne na autentifikačnej stránke, kde sa musí prihlásiť, alebo zaregistrovať, aby mohol postúpiť ďalej.
 
 Po úspešnom prihlásení užívateľ je presmerovaný na domovskú stránku. Na domovskej stránke má prístup k zoznamu vlastných prezentácií, ktoré už vytvoril. Vie si tu vytvoriť novú prezentáciu kliknutím na tlačítko \texttt{Create New}, alebo sa odhlásiť tlačítkom \texttt{Logout}. Zoznam obsahuje kartičky jednotlivých prezentácií so stručným popisom informácií. Kartička obsahuje tlačítko \texttt{Delete} pre odstránenie celej prezentácie. Kliknutím na kartičku sa zobrazí detailný popis prezentácie. V detaily má užívateľ prístup k vytvoreným verziám a popisom k nim. Nachádza sa tu náhľad do stránok jednotlivých verzií pre uľahčenie voľby správnej verzie. Užívateľ si vie zobraziť prezentáciu v prezentačnom móde cez tlačítko \texttt{View}, upraviť verziu cez tlačítko \texttt{Edit} a odstrániť verziu tlačítkom \texttt{Delete v\_}.
 
-Pri vytváraní novej prezentácie, alebo upravovaní už existujúcej nás aplikácie presmeruje na stránku editora. Editor obsahuje mnoho užitočných nástrojov pre zjednodušenie tvorby pomocou jazyka Markdown, ako napríklad typografické nástroje, vloženie zoznamov, tabuliek, obrázkov, odkazov a častí zdrojového kódu. Veľkou výhodou je výskyt náhľadu v editore, kde je hneď vidieť sformátovaný obsah stránky. V bočnom panely má užívateľ možnosť sa vrátiť na domovskú stránku cez tlačítko \texttt{Home}. Po kliknutí na tlačítko \texttt{Save} sa zobrazí panel na uloženie prezentácie. Pri upravovaní prezentácie aplikácia ponúka úpravu názvu a pridanie popisu k verzii. Prezentáciu vie tvorca uložiť pod novou verziou, alebo môže aktualizovať práve upravovanú verziu. Kliknutím na tlačítko \texttt{Preview} sa aplikácia prepne do prezentačného módu. Prepínanie stránok v prezentačnom móde funguje pomocou klávesnicových šípok. 
+Pri vytváraní novej prezentácie, alebo upravovaní už existujúcej nás aplikácie presmeruje na stránku editora. Editor obsahuje mnoho užitočných nástrojov pre zjednodušenie tvorby pomocou jazyka Markdown, ako napríklad typografické nástroje, vloženie zoznamov, tabuliek, obrázkov, odkazov a častí zdrojového kódu. Veľkou výhodou je výskyt náhľadu v editore, kde je hneď vidieť sformátovaný obsah stránky. V bočnom paneli má užívateľ možnosť sa vrátiť na domovskú stránku cez tlačítko \texttt{Home}. Po kliknutí na tlačítko \texttt{Save} sa zobrazí panel na uloženie prezentácie. Pri upravovaní prezentácie aplikácia ponúka úpravu názvu a pridanie popisu k verzii. Prezentáciu vie tvorca uložiť pod novou verziou, alebo môže aktualizovať práve upravovanú verziu. Kliknutím na tlačítko \texttt{Preview} sa aplikácia prepne do prezentačného módu. Prepínanie stránok v prezentačnom móde funguje pomocou klávesnicových šípok. 
 
 Tvorca si vie zobraziť panel so stránkami cez tlačítko \texttt{Slides}. Panel obsahuje zoznam jednotlivých stránok prezentácie. Ich poradie môže byť upravené pomocou technológie ťahaj-a-pusti (drag-and-drop). Užívateľ má možnosť prepnutia zoznamu stránok do mriežkového pohľadu(grid view), kde sa dá jednoduchšie orientovať a usporiadať jednotlivé stránky. Aplikácia umožňuje kopírovanie stránok medzi prezentáciami jednoduchým kliknutím na tlačítka \texttt{Kopírovať} a \texttt{Prilepiť}.
 
 \section{Architektúra aplikácie}
 \label{architecture}
-Aplikácia je rozdelená na dve časti, na klientskú a serverovú. Jedná sa o takzvanú dvojvrstvovú architektúru \texttt{klient-server}. Klientská časť sa nazýva aj ako prezentačná vrstva. Poskytuje interaktivitu užívateľom, má za úlohu zobrazovanie obsahu a údajov získaných zo servera. Zbiera užívateľom zadané dáta cez rôzne vstupy. Tieto dáta môžu byť spracovávané a upravované už na klientovi a sú posielané na server cez protokol HTTP\footnote{Hypertextový prenosový protokol} pomocou knihovne \textit{axios}. Server údaje prijíma a ďalej spracováva. Medzi úlohy serverovej časti patria: prijímanie požiadavkov od klienta, posielanie odpovedí na požiadavky stavovými kódmi a údajmi, zabezpečenie a udržovanie komunikácie cez autentifikáciu a autorizáciu užívateľov, vykonávanie rôznych výpočtov, formátovanie údajov pre databázu, alebo klienta. Klient nekomunikuje priamo s databázou, na to slúži server. Server údaje od klienta upravuje, aby vyhovovali formátu v databáze. Taktiež si vypýta dáta z databáze, ktoré spracováva a posiela klientovi. Grafické znázornenie architektúry pre jednoduchšie pochopenie sa nachádza na obrázku \ref{pic:architektura}.
+Aplikácia je rozdelená na dve časti, na klientskú a serverovú. Jedná sa o takzvanú dvojvrstvovú architektúru \texttt{klient-server}. Klientská časť sa nazýva aj ako prezentačná vrstva. Poskytuje interaktivitu užívateľom, má za úlohu zobrazovanie obsahu a údajov získaných zo servera. Zbiera užívateľom zadané dáta cez rôzne vstupy. Tieto dáta môžu byť spracovávané a upravované už na klientovi a sú posielané na server cez protokol HTTP\footnote{Hypertextový prenosový protokol} pomocou knihovne \textit{axios}. Server údaje prijíma a ďalej spracováva. Medzi úlohy serverovej časti patria: prijímanie požiadavkov od klienta, posielanie odpovedí na požiadavky stavovými kódmi a údajmi, zabezpečenie a udržovanie komunikácie cez autentifikáciu a autorizáciu užívateľov, vykonávanie rôznych výpočtov, formátovanie údajov pre databázu, alebo klienta. Klient nekomunikuje priamo s databázou, na to slúži server. Server údaje od klienta upravuje, aby vyhovovali formátu v databáze. Taktiež si vypýta dáta z databázy, ktoré spracováva a posiela klientovi. Grafické znázornenie architektúry pre jednoduchšie pochopenie sa nachádza na obrázku \ref{pic:architektura}.
 
     \begin{figure}[!hbt]
         \centering
@@ -32,7 +32,7 @@ Pohľad v Nuxt.js aplikácii sa skladá z viacerých vrstiev. Najvyššia vrstva
 
 Nižšia vrstva obsahuje šablónu aplikácie, pomocou ktorej sa zadefinuje rovnaký obsah na viacerých stránkach. Dobrým príkladom pre obsah v šablóne je navbar, ktorý môže byť dostupný na viacerých stránkach aplikácie. 
 
-Pod šablónou sa nachádzajú komponenty jednotlivých stránok aplikácie. Každá stránka je samostatná Vue komponenta ku ktorým Nuxt.js prideľuje špeciálne atribúty a funkcie. Medzi ne patrí \textbf{useFetch}, funkcia pre asynchrónne sťahovanie dát hneď pri návšteve stránky, naďalej atribút \textbf{auth} vyžadujúci autentifikáciu pre navštívenie stránky, alebo atribút \textbf{layout} určujúci ktorú šablónu má stránka využívať.
+Pod šablónou sa nachádzajú komponenty jednotlivých stránok aplikácie. Každá stránka je samostatná Vue komponentom, ku ktorým Nuxt.js prideľuje špeciálne atribúty a funkcie. Medzi ne patrí \textbf{useFetch}, funkcia pre asynchrónne sťahovanie dát hneď pri návšteve stránky, naďalej atribút \textbf{auth} vyžadujúci autentifikáciu pre navštívenie stránky, alebo atribút \textbf{layout} určujúci, ktorú šablónu má stránka využívať.
 
 Každá stránka môže mať niekoľko potomkov. Potomok má rovnakú štruktúru ako rodičovská stránka a taktiež obsahuje Nuxtom pridelené atribúty a funkcie. Stránka sa môže skladať z viacerých komponentov, ich výhody už boli v tejto práci zmienené vyššie.
 
@@ -46,9 +46,9 @@ Každá stránka môže mať niekoľko potomkov. Potomok má rovnakú štruktúr
 
 \subsection{Užívateľské rozhranie}
 \label{navrhui}
-Užívateľské rozhranie je dôležitou súčasťou aplikácie. Je to čast s ktorou užívateľ pracuje a preto je dôležité, aby orientácia na nej bola čím jednoduchšia a prehľadnejšia. Cieľom bolo vytvoriť minimalistické rozhranie na ktorom sa ľahko nájdu potrebné ovládacie prvky.
+Užívateľské rozhranie je dôležitou súčasťou aplikácie. Je to časť, s ktorou užívateľ pracuje, a preto je dôležité, aby orientácia na nej bola čím jednoduchšia a prehľadnejšia. Cieľom bolo vytvoriť minimalistické rozhranie, na ktorom sa ľahko nájdu potrebné ovládacie prvky.
 
-Prototyp rozhrania bol vytvorený pomocou návrhového programu Adobe XD. Prví návrh domovskej stránky a editora je vidieť na obrázku \ref{pic:prototyp_domovska_stranka} a \ref{pic:prototyp_editor}. Odvtedy aplikácia prešla viacerým prerobaniam a dizajn sa výrazne zmenil.
+Prototyp rozhrania bol vytvorený pomocou návrhového programu Adobe XD. Prvý návrh domovskej stránky a editora je vidieť na obrázku \ref{pic:prototyp_domovska_stranka} a \ref{pic:prototyp_editor}. Odvtedy aplikácia prešla viacerými prestavbami a dizajn sa výrazne zmenil.
 
 \begin{figure}[!hbt]
 \centering
@@ -67,12 +67,12 @@ Prototyp rozhrania bol vytvorený pomocou návrhového programu Adobe XD. Prví 
 \end{figure}
 
 \subsection*{Autentifikačná stránka}
-Autentifikačná stránka je prvá stránka na ktorej sa užívateľ ocitne pri prvom navštívení aplikácie. Stránka obsahuje prihlasovací panel, kde je nutné zadať správny e-mail a heslo. Pri novom užívateľovi je najprv nutná registrácia cez registračný panel. Aplikácia vyžaduje iba potrebné užívateľské údaje, ako meno, e-mail a heslo.
+Autentifikačná stránka je prvá stránka, na ktorej sa užívateľ ocitne pri prvom navštívení aplikácie. Stránka obsahuje prihlasovací panel, kde je nutné zadať správny e-mail a heslo. Pri novom užívateľovi je najprv nutná registrácia cez registračný panel. Aplikácia vyžaduje iba potrebné užívateľské údaje, ako meno, e-mail a heslo.
 
 \subsection*{Domovská stránka}
 Po úspešnom prihlásení sa zobrazí domovská stránka. Domovská stránka by mala obsahovať všetky potrebné informácie pre užívateľa. Stránka je znázornená na obrázku \ref{pic:domovska_stranka}. Obsahuje tlačítko pre odhlásenie a vytvorenie novej prezentácie. Nachádza sa tu zoznam vytvorených prezentácií a tlačítka pre ich spravovanie. 
 
-Po kliknutí na hociktorý prvok zoznamu sa zobrazí detail prezentácie. Cieľom bolo vytvoriť panel kde sa tvorca vie dozvedieť všetko o daných verziách prezentácie bez toho, aby musel otvoriť editor. Vie si tu zvoliť danú verziu a má náhľad k jej stránkam, ktoré si môže voľne preklikať.
+Po kliknutí na hociktorý prvok zoznamu sa zobrazí detail prezentácie. Cieľom bolo vytvoriť panel, kde sa tvorca vie dozvedieť všetko o daných verziách prezentácie bez toho, aby musel otvoriť editor. Vie si tu zvoliť danú verziu a má náhľad k jej stránkam, ktoré si môže voľne preklikať.
 
 \begin{figure}[!hbt]
 \centering
@@ -91,7 +91,7 @@ Po kliknutí na hociktorý prvok zoznamu sa zobrazí detail prezentácie. Cieľo
 \end{figure}
 
 \subsection*{Editor}
-Hlavným cieľom pri návrhu editora bolo vytvorenie stránky s čo najväčším priestorom pre písanie obsahu a náhľadom sformátovanej stránky (viz. obrázok \ref{pic:editor}). Avšak dôležité bolo správne umiestnenie nástrojov. Nástroje a ovládacie prvky by mali byť jednoducho prístupné pre tvorcu prezentácie a nemali by byť príliš schované. Pre dosiahnutie veľkého priestoru pre obsah s jednoducho prístupnými ovládacími prvkami sa navrhol vysúvací bočný panel.
+Hlavným cieľom pri návrhu editora bolo vytvorenie stránky s čo najväčším priestorom pre písanie obsahu a náhľadom sformátovanej stránky (viď. obrázok \ref{pic:editor}). Avšak dôležité bolo správne umiestnenie nástrojov. Nástroje a ovládacie prvky by mali byť jednoducho prístupné pre tvorcu prezentácie a nemali by byť príliš schované. Pre dosiahnutie veľkého priestoru pre obsah s jednoducho prístupnými ovládacími prvkami sa navrhol vysúvací bočný panel.
 
 Bočný panel v zavretom stave zaberá minimum priestoru na stránke a obsahuje hlavné tlačítka pre spravovanie prezentácie. Zobrazením stránok prezentácie sa bočný panel rozšíri, ako je vidieť na obrázku \ref{pic:bocny_panel}. V rozšírenom režime má tvorca prístup k zoznamu stránok, ktorý si môže zobraziť aj cez mriežkový pohľad pre jednoduchšiu orientáciu. Nad zoznamom sú dostupné tlačítka pre prácu so stránkami.
 
@@ -114,18 +114,18 @@ Bočný panel v zavretom stave zaberá minimum priestoru na stránke a obsahuje 
 \subsection*{Stránka prezentácie}
 Do prezentačného režimu sa užívateľ môže dostať cez domovskú stránku, ale aj cez editor. Na stránke je znázornený obsah prezentácie na celej obrazovke. Prezentácia je v tomto režime interaktívna a umožňuje prepínanie strán cez šípky klávesnice.
 
-\section{Návrh databáze}
+\section{Návrh databázy}
 \label{navrhdb}
-V tejto sekcii sa nachádza popis zvolených produktov pre databázu a popis uchovávanie údajov. Databáza obsahuje dve kolekcie. Nižšie sa nachádza popis oboch kolekcií a ich využitie v aplikácii. Pre jednoduchšie pochopenie, grafické znázornenie návrhu databáze je vidieť na obrázku \ref{pic:database}
+V tejto sekcii sa nachádza popis zvolených produktov pre databázu a popis uchovávanie údajov. Databáza obsahuje dve kolekcie. Nižšie sa nachádza popis oboch kolekcií a ich využitie v aplikácii. Pre jednoduchšie pochopenie, grafické znázornenie návrhu databázy je vidieť na obrázku \ref{pic:database}
 
 \subsection*{MongoDB Atlas}
-Na spravovanie a hosťovanie údajov sa používa cloudová databáza MongoDB Atlas. Pre použitie aplikácie vystačila bezplatná verzia hosťovania cez Amazon Web Services. Atlas ponúka webovú aplikáciu pre spravovanie, analýzu a zobrazenie štatistík databáze. Webová aplikácia je dostatočne zabezpečená. pre prístup k databáze je nutné pridať IP adresu do zoznamu povolených adries.  
+Na spravovanie a hosťovanie údajov sa používa cloudová databáza MongoDB Atlas. Pre použitie aplikácie vystačila bezplatná verzia hosťovania cez Amazon Web Services. Atlas ponúka webovú aplikáciu pre spravovanie, analýzu a zobrazenie štatistík databázy. Webová aplikácia je dostatočne zabezpečená, pre prístup k databáze je nutné pridať IP adresu do zoznamu povolených adries.  
 
 \subsection*{Kolekcia užívateľov}
-Kolekcia užívateľov uchováva dokumenty s informáciami o užívateľoch aplikácie. Nový dokument sa vytvorí pri registrácii nového užívateľa a obsahuje jeho osobné údaje, ako e-mail, krstné meno, priezvisko a heslo. Dokument naďalej obsahuje unikátny identifikátor a pole užívateľom vytvorených prezentácií. Objekty pola uchovávajú stručné informácie o prezentácii, jej unikátny identifikátor, cez ktorý sa pristupuje ku všetkým informáciám prezentácie, dátum poslednej úpravy, názov a číslo aktuálnej verzie. K tejto kolekcii sa pristupuje po úspešnom prihlásení do aplikácie. Načítajú sa z nej údaje pre prihláseného užívateľa a informácie pre zoznam prezentácií na domovskej stránke. 
+Kolekcia užívateľov uchováva dokumenty s informáciami o užívateľoch aplikácie. Nový dokument sa vytvorí pri registrácii nového užívateľa a obsahuje jeho osobné údaje, ako e-mail, krstné meno, priezvisko a heslo. Dokument naďalej obsahuje unikátny identifikátor a pole užívateľom vytvorených prezentácií. Objekty poľa uchovávajú stručné informácie o prezentácii, jej unikátny identifikátor, cez ktorý sa pristupuje ku všetkým informáciám prezentácie, dátum poslednej úpravy, názov a číslo aktuálnej verzie. K tejto kolekcii sa pristupuje po úspešnom prihlásení do aplikácie. Načítajú sa z nej údaje pre prihláseného užívateľa a informácie pre zoznam prezentácií na domovskej stránke. 
 
 \subsection*{Kolekcia prezentácií}
-Kolekcia prezentácií uchováva dokumenty s informáciami o vytvorených prezentáciách v aplikácii a o ich verziách. Dokument obsahuje unikátny identifikátor prezentácie, ktorý sa nachádza aj v zozname prezentácií užívateľa, názov prezentácie a pole verzií. Verzie v poli sú usporiadané vzostupne, od najstaršej k najnovšej. Jednotlivé objekty v tomto poli obsahujú číslo verzie, jej popis a pole obsahujúce stránky verzie. Stránky sú uchovávané v poli ako reťazce, od prvej k poslednej. Nový dokument v kolekcii sa vytvorí po uložení novej prezentácii. Nová verzia sa vytvorí v poli, keď užívateľ uloží prezentáciu ako novú verziu. Zvýšenie hodnoty čísla verzie má na starosti backend. Ku kolekcii sa pristupuje na troch miestach: na domovskej stránke pri otvorení panela detailu prezentácie, v editore pri upravovaní prezentácie a pri načítaní prezentácie v prezentačnom móde.
+Kolekcia prezentácií uchováva dokumenty s informáciami o vytvorených prezentáciách v aplikácii a o ich verziách. Dokument obsahuje unikátny identifikátor prezentácie, ktorý sa nachádza aj v zozname prezentácií užívateľa, názov prezentácie a pole verzií. Verzie v poli sú usporiadané vzostupne, od najstaršej k najnovšej. Jednotlivé objekty v tomto poli obsahujú číslo verzie, jej popis a pole obsahujúce stránky verzie. Stránky sú uchovávané v poli ako reťazce, od prvej k poslednej. Nový dokument v kolekcii sa vytvorí po uložení novej prezentácie. Nová verzia sa vytvorí v poli, keď užívateľ uloží prezentáciu ako novú verziu. Zvýšenie hodnoty čísla verzie má na starosti backend. Ku kolekcii sa pristupuje na troch miestach: na domovskej stránke pri otvorení panela detailu prezentácie, v editore pri upravovaní prezentácie a pri načítaní prezentácie v prezentačnom móde. OBRAZOK UŽIVATEĽOV !!
 
     \begin{figure}[!hbt]
         \centering
@@ -135,11 +135,11 @@ Kolekcia prezentácií uchováva dokumenty s informáciami o vytvorených prezen
     \end{figure}
     
 \section{Návrh backendu}
-Serverová časť aplikácie prepojuje databázu s prezentačnou vrstvou. Obecne jej úkolom je sprostredkovanie komunikácie medzi nimi. Posiela HTTP odpovede na žiadosti klienta.
+Serverová časť aplikácie prepojuje databázu s prezentačnou vrstvou. Obecne jej úlohou je sprostredkovanie komunikácie medzi nimi. Posiela HTTP odpovede na žiadosti klienta.
 
 V tejto aplikácii má server za úlohu vytváranie, autentifikáciu, autorizáciu užívateľa, taktiež vytváranie, odstraňovanie, modifikovanie prezentácií a jeho verzií.
 
-Návrh serverová čast sa skladá z troch hlavných vrstiev, ktoré medzi sebou komunikujú. Najnižšia je dátová vrstva ktorá má za úlohu vytváranie mongoose schém databáze a mapovanie modelov a entít. Najvyššia vrstva je vrstva API ktorá definuje koncové body a pristupuje k metódam repozitára. Tieto vrstvy sú prepojené vrstvou repozitára.
+Návrh serverová čast sa skladá z troch hlavných vrstiev, ktoré medzi sebou komunikujú. Najnižšia je dátová vrstva, ktorá má za úlohu vytváranie mongoose schém databázy a mapovanie modelov a entít. Najvyššia vrstva je vrstva API, ktorá definuje koncové body a pristupuje k metódam repozitára. Tieto vrstvy sú prepojené vrstvou repozitára.
 
 \subsection*{Vzor repozitára}
 \label{repository}
@@ -176,7 +176,7 @@ V repozitári prezentácie sa nachádzajú metódy:
     \end{itemize}
     
     \subsection*{Vrstva API}
-Vrstva API má za úlohu spracovávať dotazy od klienta na konkrétny koncový bod. Jednotlivé dotazy môžu obsahovať parametre v URI, takzvané query parametre, alebo parametre v tele dotazu. Pri úspešnom spracovaní dotazu API vráti HTTP odpoveď klientovi so správnym stavovým kódom \texttt{2xx}, kde čísla namiesto \texttt{x} sú doplnené podľa typu dotazu. Odpoveď môže obsahovať aj telo s obsahom. V aplikácii sa posiela obsah vo formáte JSON. Vrstva naďalej kontroluje či je dotaz správny, či je užívateľ prihlásený a má dostačujúce oprávnenie na vykonanie dotazu, alebo či požadované dáta existujú. Pri odchytení chyby API vráti chybovú hlášku so stavovým kódom \texttt{4xx}.
+Vrstva API má za úlohu spracovávať dotazy od klienta na konkrétny koncový bod. Jednotlivé dotazy môžu obsahovať parametre v URI, takzvané query parametre, alebo parametre v tele dotazu. Pri úspešnom spracovaní dotazu API vráti HTTP odpoveď klientovi so správnym stavovým kódom \texttt{2xx}, kde čísla namiesto \texttt{x} sú doplnené podľa typu dotazu. Odpoveď môže obsahovať aj telo s obsahom. V aplikácii sa posiela obsah vo formáte JSON. Vrstva naďalej kontroluje, či je dotaz správny, či je užívateľ prihlásený a má dostačujúce oprávnenie na vykonanie dotazu, alebo či požadované dáta existujú. Pri odchytení chyby API vráti chybovú hlášku so stavovým kódom \texttt{4xx}.
 
 \begin{table}[H]
     \centering
